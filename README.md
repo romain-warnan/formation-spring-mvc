@@ -184,6 +184,12 @@ Tester.
 
 ### Utiliser un fichier de propriétés
 
+> src/main/resources/application.properties
+
+```properties
+name=Spring MVC
+```
+
 > AccueilController.java
 
 Ajouter l’annotation `@PropertySource("classpath:application.properties")` pour charger le fichier de propriétés.
