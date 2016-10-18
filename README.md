@@ -292,7 +292,7 @@ Ajouter un lien vers la page d’accueil.
 Autour de chaque nom de client, ajouter un lien qui pointe vers l’URL `/client/{id}`.
 De cette manière, l’utilisateur peut cliquer sur le nom d’un client pour en voir le détail.
 
-### Utilisation d'un convertisseur
+### Utilisation d’un convertisseur
 
 #### Créer le nouveau convertisseur
 
