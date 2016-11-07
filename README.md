@@ -1,16 +1,21 @@
 # Introduction à Spring MVC
 
-## Récupérer le code source du TP
+## 0. Récupérer le code source du TP
+
+### 0.1. Cloner le dépot git
 
 > Terminal
 
 ```bash
 cd /d/idep/Mes\ Documents/eclipse_workspace
+git config --global user.name "<Prénom Nom>"
+git config --global user.email "<email>"
 git config --global http.proxy http://proxy-orange.http.insee.fr:8080
 git clone https://github.com/Insee-CNIP/formation-spring-mvc.git
+git checkout -b tp1b tp1
 ```
 
-## Importer le projet dans Eclipse
+### 0.2. Importer le projet dans Eclipse
 
 > Eclipse
 
@@ -20,7 +25,7 @@ git clone https://github.com/Insee-CNIP/formation-spring-mvc.git
 * Root directory : D:\idep\Mes Documents\eclipse_workspace\formation-spring-mvc
 * Finish
 
-## Créer une configuration de lancement
+### 0.3. Créer une configuration de lancement
 
 > Eclipse
 
@@ -31,9 +36,9 @@ git clone https://github.com/Insee-CNIP/formation-spring-mvc.git
 * Goals : clean tomcat7:run -DskipTests
 * Apply
 
-## TP1 : Mise en place
+## 1. Mise en place
 
-### Ajouter les dépendances Maven
+### 1.1. Ajouter les dépendances Maven
 
 > pom.xml
 
@@ -71,7 +76,7 @@ git clone https://github.com/Insee-CNIP/formation-spring-mvc.git
 </dependencies>
 ```
 
-### Créer le fichier de contexte de l’application
+### 1.2. Créer le fichier de contexte de l’application
 
 > src/main/resources/applicationContext.xml
 
@@ -88,7 +93,7 @@ git clone https://github.com/Insee-CNIP/formation-spring-mvc.git
 </beans>
 ```
 
-### Charger le contexte de l’application au démarage du serveur
+### 1.3. Charger le contexte de l’application au démarage du serveur
 
 > web.xml
 
@@ -102,7 +107,7 @@ git clone https://github.com/Insee-CNIP/formation-spring-mvc.git
 </listener>
 ```
 
-### Créer le fichier de contexte web
+### 1.4. Créer le fichier de contexte web
 
 > src/main/resources/servlet-dispatcher.xml 
 
@@ -121,7 +126,7 @@ git clone https://github.com/Insee-CNIP/formation-spring-mvc.git
 </beans>
 ```
 
-### Ajouter la servlet de Spring MVC et diriger toutes les requêtes vers cette servlet
+### 1.5. Ajouter la servlet de Spring MVC et diriger toutes les requêtes vers cette servlet
 
 > web.xml
 
@@ -141,11 +146,11 @@ git clone https://github.com/Insee-CNIP/formation-spring-mvc.git
 </servlet-mapping>
 ```
 
-### Créer le dossier contenant les vues
+### 1.6. Créer le dossier contenant les vues
 
 > src/main/webapp/WEB-INF/views/
 
-### Déclarer et paramétrer le viewResolver
+### 1.7. Déclarer et paramétrer le viewResolver
 
 > servlet-dispatcher.xml
 
@@ -160,18 +165,18 @@ git clone https://github.com/Insee-CNIP/formation-spring-mvc.git
 </bean>
 ```
 
-### Créer le package contenant les contrôleurs
+### 1.8. Créer le package contenant les contrôleurs
 
 > fr.insee.bar.controller
 
-### Créer le contrôleur `AccueilController`
+### 1.9. Créer le contrôleur `AccueilController`
 
 > AccueilController.java
 
 Ajouter l’annotation `@Controller`.
-Créer une méthode qui dirige vers la vue « accueil.jsp » quand on accède à l’URL « /accueil ».
-Cette méthode ajoute au modèle un objet « message » de type qui vaut "Hello world".
-Créer la JSP « views/accueil.jsp » et afficher l’objet « message ».
+Créer une méthode qui dirige vers la vue « accueil.jsp » quand on accède à l’URL « /accueil ».
+Cette méthode ajoute au modèle un objet « message » de type qui vaut "Hello world".
+Créer la JSP « views/accueil.jsp » et afficher l’objet « message ».
 
 > accueil.jsp
 
@@ -182,7 +187,7 @@ Créer la JSP « views/accueil.jsp » et afficher l’objet « message ».
 
 Tester.
 
-### Utiliser un fichier de propriétés
+### 1.10. Utiliser un fichier de propriétés
 
 > src/main/resources/application-properties
 
@@ -193,28 +198,35 @@ name=Spring MVC
 > AccueilController.java
 
 Ajouter l’annotation `@PropertySource("classpath:application.properties")` pour charger le fichier de propriétés.
-Ajouter un attribute de type `String` dans le contrôleur et l’annoter avec `@Value("${name}")` pour récupérer la valeur de la clé « name »
+Ajouter un attribute de type `String` dans le contrôleur et l’annoter avec `@Value("${name}")` pour récupérer la valeur de la clé « name »
 Paramétrer le message avec cet attribut.
 Tester.
 
-### Rediriger l’URL racine vers la page d’accueil
+### 1.11. Rediriger l’URL racine vers la page d’accueil
 
 > AccueilController.java
 
-Créer une nouvelle méthode qui se déclenche quand on accède à l’URL « / ».
-À l’aide de l’instruction `"redirect:/accueil"` rediriger cette URL vers l’URL « /accueil ».
+Créer une nouvelle méthode qui se déclenche quand on accède à l’URL « / ».
+À l’aide de l’instruction `"redirect:/accueil"` rediriger cette URL vers l’URL « /accueil ».
 Utiliser un code 301 (redirection permanente) pour effectuer la redirection (important pour le référencement).
 Tester et vérifier avec les outils de développement du navigateur que le code est bien 301.
 
-## TP2 : Navigation
+## 2. Navigation
 
-### Liste de tous les clients
+> Terminal
 
-#### Créer un contrôleur qui permet d’afficher la liste de tous les clients
+```bash
+git commit -a -m "TP1 <idep>"
+git checkout -b tp2b tp2
+```
+
+### 2.1. Liste de tous les clients
+
+#### 2.1.1. Créer un contrôleur qui permet d’afficher la liste de tous les clients
 
 > ClientsController.java
 
-Ce contrôleur possède une méthode qui est appelée à l’URL « /clients ».
+Ce contrôleur possède une méthode qui est appelée à l’URL « /clients ».
 Il récupère la liste de tous les clients dans la base de donnée et l’ajoute au modèle.
 
 ```java
@@ -226,13 +238,13 @@ Il récupère la liste de tous les clients dans la base de donnée et l’ajoute
 
 Il lance la génération de la vue `/jsp/clients.jsp`.
 
-#### Afficher la liste des clients
+#### 2.1.2. Afficher la liste des clients
 
 > clients.jsp
 
 En itérant sur la liste des clients avec le tag `<c:forEach>`, afficher la liste de tous les clients (nom et email) dans un tableau :
 
-> Rappel : structure d’un tableau HTML
+> :grey_question: Rappel : structure d’un tableau HTML
 
 ```html
 	<table>
@@ -254,30 +266,30 @@ En itérant sur la liste des clients avec le tag `<c:forEach>`, afficher la list
 	</table>
 ```
 
-#### Ajouter un lien vers la page d’accueil
+#### 2.1.3. Ajouter un lien vers la page d’accueil
 
 > clients.jsp
 
 Grace au tag `<c:url>` créer une variable qui pointe vers la page d’accueil.
 Utiliser cette variable dans un lien qui redirige vers la page d’accueil.
 
-#### Sur la page d’accueil, ajouter un lien vers la page de la liste des clients
+#### 2.1.4. Sur la page d’accueil, ajouter un lien vers la page de la liste des clients
 
 > accueil.jsp
 
-### Détails pour un client donné
+### 2.2. Détails pour un client donné
 
-#### Créer un contrôleur qui permet d’afficher les informations concernant un client donné
+#### 2.2.1. Créer un contrôleur qui permet d’afficher les informations concernant un client donné
 
 > ClientController.java
 
-Ce contrôleur possède une méthode qui est appelée à l’URL « /client/{id} ».
+Ce contrôleur possède une méthode qui est appelée à l’URL « /client/{id} ».
 À l’aide de l’annotation `@PathVariable`, récupérer la valeur de l’identifiant passé dans l’URL.
 Dans la base, récupérer le client associé à cet identifiant.
 Ajouter le client au modèle.
 Diriger vers la page `/jsp/client.jsp`.
 
-#### Créer la page client.jsp
+#### 2.2.2. Créer la page client.jsp
 
 > client.jsp
 
@@ -285,31 +297,31 @@ Y afficher les informations relatives au client : identifiant, nom, email et dat
 Pour formater la date, utiliser le tag `<fmt:formatDate>` et le format `dd/MMMM/yyyy`.
 Ajouter un lien vers la page d’accueil.
 
-#### Faire le lien entre la page clients et les sous-pages client
+#### 2.2.3. Faire le lien entre la page clients et les sous-pages client
 
 > clients.jsp
 
 Autour de chaque nom de client, ajouter un lien qui pointe vers l’URL `/client/{id}`.
 De cette manière, l’utilisateur peut cliquer sur le nom d’un client pour en voir le détail.
 
-### Utilisation d’un convertisseur
+### 2.3. Utilisation d’un convertisseur
 
-#### Créer le nouveau convertisseur
+#### 2.3.1. Créer le nouveau convertisseur
 
-> ClientConverter
+> ClientConverter.java
 
-Dans  le package fr.insee.bar.converter, créer une classe `ClientConverter` qui implémente de l’interface `Converter<String, Client>`.
+Dans  le package `fr.insee.bar.converter`, créer une classe `ClientConverter` qui implémente de l’interface `Converter<String, Client>`.
 Ne pas oublier le stéréotype `@Component` sur la classe. 
-Implémenter la méthode `convert` avec un appel à `ClientDao.find`.
+Implémenter la méthode `convert` avec un appel à `clientDao.find(id)`.
 
-#### Simplifier le contrôleur
+#### 2.3.2. Simplifier le contrôleur
 
-> ClientController
+> ClientController.java
 
 Modifier la signature de la méthode pour remplacer le `Short` par un `Client`.
 Supprimer le DAO du contrôleur.
 
-#### Enregistrer le convertissuer
+#### 2.3.3. Enregistrer le convertissuer
 
 > dispatcher-servlet.xml
 
@@ -326,4 +338,4 @@ Déclarer ce nouveau convertisseur auprès de la servlet de Spring MVC :
 </bean>
  ```
  
- Tester que l’application fonctionne toujours.
+Tester que l’application fonctionne toujours.
