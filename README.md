@@ -1,14 +1,14 @@
-# Introduction à Spring MVC
+# Introduction Ã  Spring MVC
 
-## 0. Récupérer le code source du TP
+## 0. RÃ©cupÃ©rer le code source du TP
 
-### 0.1. Cloner le dépot git
+### 0.1. Cloner le dÃ©pot git
 
 > Terminal
 
 ```bash
 cd /d/idep/Mes\ Documents/eclipse_workspace
-git config --global user.name "<Prénom Nom>"
+git config --global user.name "<PrÃ©nom Nom>"
 git config --global user.email "<email>"
 git config --global http.proxy http://proxy-orange.http.insee.fr:8080
 git clone https://github.com/Insee-CNIP/formation-spring-mvc.git
@@ -20,16 +20,16 @@ git checkout -b tp1b tp1
 > Eclipse
 
 * File
-* Import…
+* Importâ€¦
 * Existing Maven Project
 * Root directory : D:\idep\Mes Documents\eclipse_workspace\formation-spring-mvc
 * Finish
 
-### 0.3. Créer une configuration de lancement
+### 0.3. CrÃ©er une configuration de lancement
 
 > Eclipse
 
-* Run configuration…
+* Run configurationâ€¦
 * Maven build > New
 * Name : formation-spring-mvc-run
 * Base directory : ${workspace_loc:/formation-spring-mvc}
@@ -38,7 +38,7 @@ git checkout -b tp1b tp1
 
 ## 1. Mise en place
 
-### 1.1. Ajouter les dépendances Maven
+### 1.1. Ajouter les dÃ©pendances Maven
 
 > pom.xml
 
@@ -76,7 +76,7 @@ git checkout -b tp1b tp1
 </dependencies>
 ```
 
-### 1.2. Créer le fichier de contexte de l’application
+### 1.2. CrÃ©er le fichier de contexte de lâ€™application
 
 > src/main/resources/applicationContext.xml
 
@@ -93,7 +93,7 @@ git checkout -b tp1b tp1
 </beans>
 ```
 
-### 1.3. Charger le contexte de l’application au démarage du serveur
+### 1.3. Charger le contexte de lâ€™application au dÃ©marage du serveur
 
 > web.xml
 
@@ -107,7 +107,7 @@ git checkout -b tp1b tp1
 </listener>
 ```
 
-### 1.4. Créer le fichier de contexte web
+### 1.4. CrÃ©er le fichier de contexte web
 
 > src/main/resources/servlet-dispatcher.xml 
 
@@ -126,7 +126,7 @@ git checkout -b tp1b tp1
 </beans>
 ```
 
-### 1.5. Ajouter la servlet de Spring MVC et diriger toutes les requêtes vers cette servlet
+### 1.5. Ajouter la servlet de Spring MVC et diriger toutes les requÃªtes vers cette servlet
 
 > web.xml
 
@@ -146,11 +146,11 @@ git checkout -b tp1b tp1
 </servlet-mapping>
 ```
 
-### 1.6. Créer le dossier contenant les vues
+### 1.6. CrÃ©er le dossier contenant les vues
 
 > src/main/webapp/WEB-INF/views/
 
-### 1.7. Déclarer et paramétrer le viewResolver
+### 1.7. DÃ©clarer et paramÃ©trer le viewResolver
 
 > servlet-dispatcher.xml
 
@@ -165,18 +165,18 @@ git checkout -b tp1b tp1
 </bean>
 ```
 
-### 1.8. Créer le package contenant les contrôleurs
+### 1.8. CrÃ©er le package contenant les contrÃ´leurs
 
 > fr.insee.bar.controller
 
-### 1.9. Créer le contrôleur `AccueilController`
+### 1.9. CrÃ©er le contrÃ´leur `AccueilController`
 
 > AccueilController.java
 
-Ajouter l’annotation `@Controller`.
-Créer une méthode qui dirige vers la vue « accueil.jsp » quand on accède à l’URL « /accueil ».
-Cette méthode ajoute au modèle un objet « message » de type qui vaut "Hello world".
-Créer la JSP « views/accueil.jsp » et afficher l’objet « message ».
+Ajouter lâ€™annotation `@Controller`.
+CrÃ©er une mÃ©thode qui dirige vers la vue Â« accueil.jsp Â» quand on accÃ¨de Ã  lâ€™URL Â« /accueil Â».
+Cette mÃ©thode ajoute au modÃ¨le un objet Â« message Â» de type qui vaut "Hello world".
+CrÃ©er la JSP Â« views/accueil.jsp Â» et afficher lâ€™objet Â« message Â».
 
 > accueil.jsp
 
@@ -187,7 +187,7 @@ Créer la JSP « views/accueil.jsp » et afficher l’objet « message ».
 
 Tester.
 
-### 1.10. Utiliser un fichier de propriétés
+### 1.10. Utiliser un fichier de propriÃ©tÃ©s
 
 > src/main/resources/application-properties
 
@@ -197,16 +197,16 @@ name=Spring MVC
 
 > AccueilController.java
 
-Ajouter l’annotation `@PropertySource("classpath:application.properties")` pour charger le fichier de propriétés.
-Ajouter un attribute de type `String` dans le contrôleur et l’annoter avec `@Value("${name}")` pour récupérer la valeur de la clé « name »
-Paramétrer le message avec cet attribut.
+Ajouter lâ€™annotation `@PropertySource("classpath:application.properties")` pour charger le fichier de propriÃ©tÃ©s.
+Ajouter un attribute de type `String` dans le contrÃ´leur et lâ€™annoter avec `@Value("${name}")` pour rÃ©cupÃ©rer la valeur de la clÃ© Â« name Â»
+ParamÃ©trer le message avec cet attribut.
 Tester.
 
-### 1.11. Rediriger l’URL racine vers la page d’accueil
+### 1.11. Rediriger lâ€™URL racine vers la page dâ€™accueil
 
 > AccueilController.java
 
-Créer une nouvelle méthode qui se déclenche quand on accède à l’URL « / ».
-À l’aide de l’instruction `"redirect:/accueil"` rediriger cette URL vers l’URL « /accueil ».
-Utiliser un code 301 (redirection permanente) pour effectuer la redirection (important pour le référencement).
-Tester et vérifier avec les outils de développement du navigateur que le code est bien 301.
+CrÃ©er une nouvelle mÃ©thode qui se dÃ©clenche quand on accÃ¨de Ã  lâ€™URL Â« / Â».
+Ã€ lâ€™aide de lâ€™instruction `"redirect:/accueil"` rediriger cette URL vers lâ€™URL Â« /accueil Â».
+Utiliser un code 301 (redirection permanente) pour effectuer la redirection (important pour le rÃ©fÃ©rencement).
+Tester et vÃ©rifier avec les outils de dÃ©veloppement du navigateur que le code est bien 301.
