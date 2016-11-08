@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import fr.insee.bar.dao.ClientDao;
@@ -19,7 +18,7 @@ import fr.insee.bar.validator.ClientValidator;
 
 @Controller
 @RequestMapping("/client")
-public class ModificationClientController extends WebMvcConfigurerAdapter {
+public class ModificationClientController {
 
 	@Autowired
 	private ClientDao clientDao;
