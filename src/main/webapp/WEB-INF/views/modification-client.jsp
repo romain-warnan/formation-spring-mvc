@@ -16,7 +16,7 @@
 			<form:hidden path="id"/>
 			
 			<label>Titre&nbsp;:</label>
-			<form:select type="text" path="titre" >
+			<form:select path="titre" >
 				<form:options itemLabel="libelle" />
 			</form:select><br/>
 			
