@@ -12,26 +12,25 @@
 	<body>
 		<h1>Nouveau client</h1>
 		<c:url value="/client/nouveau" var="url" />
-		<form:form action="${url}" modelAttribute="client" method="post" >
-			<label>Titre&nbsp;:</label>
-			<form:select path="titre" >
-				<form:options itemLabel="libelle" />
-			</form:select><br/>
-			<form:errors cssClass="error" path="titre" /><br/>
+		<form action="${url}" method="post" >
+		
+			<label>Titre&nbsp;</label>
+			<select name="titre" >
+				<c:forEach items="${titres}" var="titre">
+					<option value="${titre}"><c:out value="${titre.libelle}" /></option>
+				</c:forEach>
+			</select><br/>
 			
 			<label>Nom&nbsp;:</label>
-			<form:input type="text" path="nom" /><br/>
-			<form:errors cssClass="error" path="nom" /><br/>
+			<input type="text" name="nom" /><br/>
 			
 			<label>Email&nbsp;:</label>
-			<form:input type="text" path="email" /><br/>
-			<form:errors cssClass="error" path="email" /><br/>
-			
+			<input type="text" name="email" />
+			<br/>
 			<label>Date de naissance&nbsp;:</label>
-			<form:input type="text" path="dateNaissance" /> <em>jj/mm/aaaa</em><br/>
-			<form:errors cssClass="error" path="dateNaissance" /><br/>
+			<input type="text" name="dateNaissance" /> <em>jj/mm/aaaa</em><br/>
 			
 			<button type="submit">Créer</button>
-		</form:form>
+		</form>
 	</body>
 </html>

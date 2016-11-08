@@ -2,12 +2,6 @@ package fr.insee.bar.model;
 
 import java.util.Date;
 
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Past;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
-
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.google.common.base.MoreObjects;
@@ -26,21 +20,15 @@ public class Client {
 		this.nom = nom;
 	}
 
-	@Min(0)
 	private Short id;
 
-	@Size(min = 5, max = 300)
 	private String nom;
 
-	@Pattern(regexp = "[-_a-z0-9.]+@[-_a-z0-9]+\\.[a-z]{2,4}")
 	private String email;
 
-	@NotNull
 	private Titre titre;
 
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
-	@NotNull
-	@Past
 	private Date dateNaissance;
 
 	public Short getId() {

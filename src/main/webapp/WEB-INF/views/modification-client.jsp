@@ -19,19 +19,15 @@
 			<form:select path="titre" >
 				<form:options itemLabel="libelle" />
 			</form:select><br/>
-			<form:errors cssClass="error" path="titre" /><br/>
 			
 			<label>Nom&nbsp;:</label>
 			<form:input type="text" path="nom" /><br/>
-			<form:errors cssClass="error" path="nom" /><br/>
 			
 			<label>Email&nbsp;:</label>
 			<form:input type="text" path="email" /><br/>
-			<form:errors cssClass="error" path="email" /><br/>
 			
 			<label>Date de naissance&nbsp;:</label>
 			<form:input type="text" path="dateNaissance" /> <em>jj/mm/aaaa</em><br/>
-			<form:errors cssClass="error" path="dateNaissance" /><br/>
 			
 			<button type="submit">Modifier</button>
 		</form:form>
