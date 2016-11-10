@@ -27,6 +27,21 @@ $(document).ready(function() {
 		});
 	};
 	
+	var commander = function() {
+		var cocktails = [];
+		$('#commande li.hidden').each(function(index, item) {
+			cocktails.push({id: $(item).text()});
+		});
+		$.ajax({
+			url: '/cocktails/commande',
+			method: 'POST',
+			contentType : 'application/json; charset=utf-8',
+			data: JSON.stringify(cocktails)
+		}).done(function(prix) {
+			afficherPrix(prix);
+		});
+	};
+	
 	var afficherSuggestions = function(cocktails) {
 		if(cocktails.length > 0){
 			suggerer(cocktails);
@@ -71,20 +86,6 @@ $(document).ready(function() {
 		$champ.focus();
 	};
 	
-	var commander = function() {
-		var cocktails = [];
-		$('#commande li.hidden').each(function(index, item) {
-			cocktails.push({id: $(item).text()});
-		});
-		$.ajax({
-			url: '/cocktails/commande',
-			method: 'POST',
-			contentType : 'application/json; charset=utf-8',
-			data: JSON.stringify(cocktails)
-		}).done(function(prix) {
-			afficherPrix(prix);
-		});
-	};
 	
 	initialiser(context);
 });
