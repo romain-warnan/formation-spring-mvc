@@ -40,8 +40,6 @@ $(document).ready(function() {
 			data: JSON.stringify(cocktails)
 		}).done(function(prix) {
 			afficherPrix(prix);
-		}).fail(function(response) {
-			afficherErreur(response.responseText);
 		});
 	};
 	
