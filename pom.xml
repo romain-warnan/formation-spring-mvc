@@ -6,18 +6,9 @@
 	<packaging>war</packaging>
 	<name>Formation Spring MVC</name>
 	<description>Formation interne Insee Spring MVC</description>
-	
-	<!-- Properties -->
-	<properties>
-		
-	</properties>
-	
-	<!-- Dependencies -->
 	<dependencies>
-		
+		<!-- Ajouter les dépendances -->
 	</dependencies>
-	
-	<!-- Build -->
 	<build>
 		<pluginManagement>
 			<plugins>
