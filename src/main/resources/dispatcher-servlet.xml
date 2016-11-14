@@ -22,12 +22,5 @@
 		</property>
 	</bean>
 
-	<mvc:annotation-driven conversion-service="conversionService" />
-	<bean id="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
-		<property name="converters">
-			<set>
-				<bean class="fr.insee.bar.converter.ClientConverter" />
-			</set>
-		</property>
-	</bean>
+	<mvc:annotation-driven />
 </beans>
