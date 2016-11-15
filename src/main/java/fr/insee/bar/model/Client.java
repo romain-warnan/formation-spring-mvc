@@ -29,7 +29,7 @@ public class Client {
 	@Min(0)
 	private Short id;
 
-	@Size(min = 5, max = 300)
+	@Size(min = 5, max = 30)
 	private String nom;
 
 	@Pattern(regexp = "[-_a-z0-9.]+@[-_a-z0-9]+\\.[a-z]{2,4}")
@@ -85,8 +85,7 @@ public class Client {
 
 	public enum Titre {
 
-		M((short) 1, "Monsieur"),
-		MME((short) 2, "Madame");
+		M((short) 1, "Monsieur"), MME((short) 2, "Madame");
 
 		private String libelle;
 		private Short code;
@@ -106,10 +105,10 @@ public class Client {
 
 		public static Titre of(short titre) {
 			switch (titre) {
-				case 2:
-					return MME;
-				default:
-					return M;
+			case 2:
+				return MME;
+			default:
+				return M;
 			}
 		}
 	}
@@ -130,12 +129,9 @@ public class Client {
 
 	@Override
 	public String toString() {
-		return MoreObjects.toStringHelper(this)
-			.add("id", id)
-			.add("nom", nom)
-			.add("email", email)
-			.add("dateNaissance", dateNaissance)
-			.toString();
+		return MoreObjects.toStringHelper(this).add("id", id).add("nom", nom)
+				.add("email", email).add("dateNaissance", dateNaissance)
+				.toString();
 	}
 
 }
