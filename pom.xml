@@ -6,21 +6,29 @@
 	<packaging>war</packaging>
 	<name>Formation Spring MVC</name>
 	<description>Formation interne Insee Spring MVC</description>
-	
+
 	<!-- Properties -->
 	<properties>
-		
+
 	</properties>
-	
+
 	<!-- Dependencies -->
 	<dependencies>
-		
+
 	</dependencies>
-	
+
 	<!-- Build -->
 	<build>
 		<pluginManagement>
 			<plugins>
+				<plugin>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>3.5.1</version>
+					<configuration>
+						<source>1.8</source>
+						<target>1.8</target>
+					</configuration>
+				</plugin>
 				<plugin>
 					<groupId>org.apache.tomcat.maven</groupId>
 					<artifactId>tomcat7-maven-plugin</artifactId>
