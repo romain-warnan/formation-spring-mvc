@@ -1,7 +1,6 @@
 package fr.insee.bar.controller;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.forwardedUrl;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
@@ -47,8 +46,6 @@ public class AccueilControllerTestCase {
 			.perform(get("/accueil"))
 			.andExpect(status().isOk())
 			.andExpect(model().attributeExists("message"))
-			.andExpect(view().name("accueil"))
-			.andExpect(forwardedUrl("/WEB-INF/views/accueil.jsp"));
+			.andExpect(view().name("accueil"));
 	}
-
 }
