@@ -14,7 +14,6 @@ import org.mockito.internal.util.reflection.Whitebox;
 import org.springframework.http.HttpStatus;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 public class AccueilControllerTestCase {
@@ -30,7 +29,7 @@ public class AccueilControllerTestCase {
 		Whitebox.setInternalState(accueilController, "name", "Spring MVC");
 		this.mockMvc = MockMvcBuilders
 			.standaloneSetup(accueilController)
-			.setViewResolvers(viewResolver())
+			.setViewResolvers(new InternalResourceViewResolver("/WEB-INF/views/", ".jsp"))
 			.build();
 	}
 
@@ -50,13 +49,6 @@ public class AccueilControllerTestCase {
 			.andExpect(model().attributeExists("message"))
 			.andExpect(view().name("accueil"))
 			.andExpect(forwardedUrl("/WEB-INF/views/accueil.jsp"));
-	}
-
-	private static ViewResolver viewResolver() {
-		InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
-		viewResolver.setPrefix("/WEB-INF/views/");
-		viewResolver.setSuffix(".jsp");
-		return viewResolver;
 	}
 
 }
