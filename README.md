@@ -7,12 +7,14 @@
 > Terminal
 
 ```bash
-cd /d/idep/Mes\ Documents/eclipse_workspace
-git config --global user.name "<Prénom Nom>"
-git config --global user.email "<email>"
+cd /d/*idep*/Mes\ Documents/eclipse_workspace
+git config --global user.name "*Prénom Nom*"
+git config --global user.email "*email*"
 git config --global http.proxy http://proxy-orange.http.insee.fr:8080
 git clone https://github.com/Insee-CNIP/formation-spring-mvc.git
-git checkout -b tp1b tp1
+cd formation-spring-mvc
+git checkout tp1-enonce
+git pull
 ```
 
 ### 0.2. Importer le projet dans Eclipse
@@ -189,7 +191,7 @@ Tester.
 
 ### 1.10. Utiliser un fichier de propriétés
 
-> src/main/resources/application-properties
+> src/main/resources/application.properties
 
 ```properties
 name=Spring MVC
@@ -216,8 +218,10 @@ Tester et vérifier avec les outils de développement du navigateur que le code 
 > Terminal
 
 ```bash
-git commit -a -m "TP1 <idep>"
-git checkout -b tp2b tp2
+git add .
+git commit -m "TP1 <idep>"
+git checkout tp2-enonce
+git pull
 ```
 
 ### 2.1. Liste de tous les clients
@@ -236,7 +240,7 @@ Il récupère la liste de tous les clients dans la base de donnée et l’ajoute
 	List<Client> clients = clientDao.findAll();
 ```
 
-Il lance la génération de la vue `/jsp/clients.jsp`.
+Il lance la génération de la vue `/WEB-INF/views/clients.jsp`.
 
 #### 2.1.2. Afficher la liste des clients
 
@@ -339,14 +343,16 @@ Déclarer ce nouveau convertisseur auprès de la servlet de Spring MVC :
  ```
  
 Tester que l’application fonctionne toujours.
- 
+
 ## 3. Intercepteurs
 
 > Terminal
 
 ```bash
-git commit -a -m "TP2 <idep>"
-git checkout -b tp3b tp3
+git add .
+git commit -m "TP2 <idep>"
+git checkout tp3-enonce
+git pull
 ```
 
 ### 3.1. Créer un intercepteur qui mesure la durée de la requête
@@ -451,8 +457,10 @@ Déclarer ce nouveau résolveur d’argument auprès de la servlet de Spring MVC
 > Terminal
 
 ```bash
-git commit -a -m "TP3 <idep>"
-git checkout -b tp4b tp4
+git add .
+git commit -m "TP3 <idep>"
+git checkout tp4-enonce
+git pull
 ```
 
 ### 4.1. Ajouter un nouveau client
@@ -560,8 +568,10 @@ Il s’agit de la méthode annotée `@ModelAttribute`. Constater que le menu dé
 > Terminal
 
 ```bash
-git commit -a -m "TP4 <idep>"
-git checkout -b tp5b tp5
+git add .
+git commit -m "TP4 <idep>"
+git checkout tp5-enonce
+git pull
 ```
 
 ### 5.1. Validation élémentaire des objets de la classe `Client`
@@ -589,7 +599,7 @@ git checkout -b tp5b tp5
 
 Les règles sont les suivantes :
  * l’identifiant doit être positif,
- * la taille du nom doit être compris entre 5 et 300 caractères,
+ * la taille du nom doit être compris entre 5 et 30 caractères,
  * l’email doit correspondre au patron suivant :  `[-_a-z0-9.]+@[-_a-z0-9]+\.[a-z]{2,4}`,
  * le titre doit être non nul,
  * la date doit être non nulle et située dans le passé.
@@ -680,6 +690,13 @@ Injecter le validator dans le contrôleur grâce à l’annotation `@Autowired`.
 
 ## 6. Ajax
 
+```bash
+git add .
+git commit -m "TP5 <idep>"
+git checkout tp6-enonce
+git pull
+```
+
 ![Formulaire commande cocktails](images/ajax-commande.png)
 
 ### 6.1. Créer un contrôleur qui permet de passer une nouvelle commande
@@ -758,3 +775,191 @@ Dans la fonction `done`, appeler  la fonction `afficherPrix` avec en paramètre 
 > :question: Toute la difficulté réside dans la création de la liste des cocktails sélectionnés. Il faut parcourir les éléments `li.hidden` du bloc `#commande` et ajouter leur contenu un à un à un tableau vide. Chaque élément est ajouté sous la forme `{id: valeur}`. Cette forme représente en JSON un objet de type cocktail qui ne conteint qu’un identifiant.
 
 Tester que tout fonctionne.
+
+## 7. Exceptions
+
+```bash
+git add .
+git commit -m "TP6 <idep>"
+git checkout tp7-enonce
+git pull
+```
+
+### 7.1. Vérifier que seul un responsable peut modifier ou créer un nouveau client
+
+#### 7.1.1. Créer une nouvelle exception `BarDroitException`
+
+> BarDroitException.java
+
+La faire hériter de `BarException` au travers de `BarHttpException`.
+
+#### 7.1.2. Créer une méthode qui vérifie que l’employé est un responsable
+
+> EmployeService.java
+
+La nouvelle méthode doit lever une exception de type `BarDroitException` si l’employé n’est pas un responsable.
+
+#### 7.1.3. Réaliser cette vérification dans les contrôleurs
+
+> NouveauClientController.java, ModificationClientController.java
+
+Utiliser cette méthode dans les deux contrôleurs de création et de modification d’un client.
+
+#### 7.1.4. Créer un contrôleur qui traite cette exception
+
+> ExceptionController.java
+
+Annoter ce contrôleur `ControllerAdvice`. Écrire une méthode qui est appelée dès qu’une exception de type `BarDroitException` est levée. Ce contrôleur dirige vers une JSP appelée `exception.jsp`. Cette JSP devra afficher le message d’erreur de l’exception.
+Le contrôleur doit en plus retourner un code HTTP 403 (Forbidden).
+
+#### 7.1.5. Créer une page d’erreur
+
+> exception.jsp
+
+Dans la nouvelle JSP, afficher le message d’erreur de l’exception.
+
+#### 7.1.6. Modifier le profile pour pouvoir vérifier que le contrôle fonctionne
+
+> web.xml
+
+Remplacer `responsable` par `serveur`.
+
+### 7.2. Vérifier qu’une commande comporte au moins un cocktail
+
+#### 7.2.1. Créer une nouvelle exception `BarCommandeException`
+
+> BarAjaxException.java
+
+La faire hériter de `BarException` au travers de `BarAjaxException`.
+
+#### 7.2.2. Créer une méthode qui vérifie qu’une commande n’est pas vide
+
+> CocktailService.java
+
+La nouvelle méthode doit lever une exception de type `BarCommandeException` si la commande ne contient pas de cocktail.
+
+#### 7.2.3. Réaliser cette vérification dans le contrôleur
+
+> CocktailControlleur.java
+
+#### 7.2.4. Créer un contrôleur qui traite cette exception
+
+> ExceptionController.java
+
+Écrire une méthode qui est appelée dès qu’une exception de type `BarCommandeException` est levée. Le contrôleur doit en plus retourner un code HTTP 400 (Bad request) et le message d’erreur dans un objet `HttpEntity`.
+
+#### 7.2.5. Afficher une erreur si la commande est passée sans contenir aucun cocktail
+
+> recherche.js
+
+Ajouter un *callback* `fail` en cas d’erreur. Dans ce *callback*, faire appel à la fonction `afficherErreur` avec le message d’erreur;
+
+## 8. Tests
+
+### 8.1. Ajouter les librairies nécessaires aux différents tests
+
+> pom.xml
+
+```xml
+<dependency>
+	<groupId>junit</groupId>
+	<artifactId>junit</artifactId>
+	<version>4.12</version>
+	<scope>test</scope>
+</dependency>
+<dependency>
+	<groupId>org.mockito</groupId>
+	<artifactId>mockito-all</artifactId>
+	<version>1.10.19</version>
+	<scope>test</scope>
+</dependency>
+<dependency>
+    <groupId>org.springframework</groupId>
+    <artifactId>spring-test</artifactId>
+    <version>${spring.version}</version>
+    <scope>test</scope>
+</dependency>
+<dependency>
+   <groupId>org.glassfish.web</groupId>
+   <artifactId>javax.el</artifactId>
+   <version>2.2.4</version>
+   <scope>test</scope>
+</dependency>
+```
+
+### 8.2. Écrire des tests unitaires
+
+Écrire des tests unitaires pour les méthodes de `AccueilController` et pour les méthodes `NouveauClientController` (à part pour `nouveauClient`).
+
+#### 8.2.1 Préparer les tests de `AccueilController`
+
+> AccueilControllerTestCase.java
+
+ 1. Injecter le contrôleur à tester grâce à l’annotation `@InjectMocks`.
+
+ 2. Déclarer un attribut de type `MockMvc`.
+
+ 3. Dans la méthode `@Before`, initialiser les *mocks* : `MockitoAnnotations.initMocks(this);`.
+
+ 4. Grâce à la classe `Whitebox`, valoriser l’attribut name du contrôleur.
+
+ 5. Instancier l’objet `MockMvc` en mode *stand-alone* :
+
+```java
+this.mockMvc = MockMvcBuilders
+	.standaloneSetup(accueilController)
+	.setViewResolvers(new InternalResourceViewResolver("/WEB-INF/views", "jsp"))
+	.build();
+```
+
+#### 8.2.2 Tester la méthode welcome()
+
+ * tester que le status est 301,
+ * tester qu l’attribut `message` n’existe pas dans le modèle.
+
+#### 8.2.3 Tester la méthode hello()
+
+ * tester que le status est 200,
+ * tester que l’attribut `message` existe dans le modèle,
+ * tester que le nom de la vue est `accueil`.
+
+#### 8.2.4 Préparer les tests de `NouveauClientController`
+
+> NouveauClientControllerTestCase.java
+
+ 1. Injecter le contrôleur à tester grâce à l’annotation `@InjectMocks`.
+ 2. Injecter des *mocks* des services et DAO grâce à l’annotation `@Mock`.
+ 3. Écrire la méthode `@Before`.
+
+#### 8.2.5 Tester la méthode nouveauClientPost() pour un formulaire valide
+
+ 1. Mocker le comportement des méthodes `validate` et `insert`.
+ 2. Exécuter un POST avec en paramètre des données de formulaire valides
+ 3. Puis tester que :
+  * le status est 302,
+  * l’attribut client n’existe pas,
+  * le modèle ne contient aucune erreur,
+  * l’url de redirection est `/clients`,
+  * il existe un attribut flash qui s’appelle `nouveauClient`.
+ 
+#### 8.2.5 Tester la méthode nouveauClientPost() pour un formulaire non valide
+
+ 1. Mocker le comportement des méthodes `validate` et `insert`.
+ 2. Exécuter un POST avec en paramètre des données de formulaire valides sauf pour l’email
+ 3. Puis tester que :
+  * le status est `OK`,
+  * l’attribut client existe,
+  * le modèle contient une erreur,
+  * le nom de la vue est `nouveau-client`.
+
+### 8.3. Écrire des tests d’intégration
+
+> AccueilControllerTestCase.java, NouveauClientControllerTest.java
+
+Écrire des tests d’intégration pour toutes les méthodes de `AccueilController` et pour les méthodes `NouveauClientController`.
+
+En particulier, cette fois-ci, tester la méthode `/client/nouveau` pour un profile "serveur".
+
+## 9. Configuration
+
+Remplacer toute la configuration xml par de la configuration Java. Penser à adapter le ficihier `web.xml`. Supprimer les fichiers `applicationContext.xml` et `dispatcher-servlet.xml`.

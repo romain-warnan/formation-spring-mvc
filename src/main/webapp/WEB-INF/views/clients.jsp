@@ -14,6 +14,9 @@
 		<c:if test="${not empty nouveauClient}">
 			<p class="success">Le client <c:out value="${nouveauClient.email}" /> a été créé avec succès.</p>
 		</c:if>
+		<c:if test="${not empty message}">
+			<p class="success"><c:out value="${message}" /></p>
+		</c:if>
 		<table>
 		<tr>
 			<th>Id</th>
@@ -27,6 +30,6 @@
 			</tr>
 		</c:forEach>
 		</table>
-		<p><a href="<c:url value="/accueil" />">Accueil</a> | <a href="<c:url value="/client/nouveau" />">Nouveau client</a></p>
+		<p><a href="<c:url value="/accueil" />">Accueil</a> | <a href="<c:url value="/client/nouveau" />">Nouveau client</a> | <a href="<c:url value="/client/chargement" />">Charger une liste de clients</a></p>
 	</body>
 </html>

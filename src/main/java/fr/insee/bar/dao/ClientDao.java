@@ -68,21 +68,23 @@ public class ClientDao {
 		return template.query(SQL_FIND_ALL, rowMapper);
 	}
 
-	public void insert(Client client) {
+	public Client insert(Client client) {
 		template.update(SQL_INSERT, ImmutableMap.of(
 			"nom", client.getNom(),
 			"email", client.getEmail(),
 			"dateNaissance", client.getDateNaissance(),
 			"titre", client.getTitre().getCode()));
+		return this.findByEmail(client.getEmail()).get();
 	}
 
-	public void update(Client client) {
+	public Client update(Client client) {
 		template.update(SQL_UPDATE, ImmutableMap.of(
 			"nom", client.getNom(),
 			"email", client.getEmail(),
 			"dateNaissance", client.getDateNaissance(),
 			"titre", client.getTitre().getCode(),
 			"id", client.getId()));
+		return client;
 	}
 
 	@Component

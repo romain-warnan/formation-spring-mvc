@@ -2,6 +2,7 @@ package fr.insee.bar.controller;
 
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.flash;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
@@ -52,12 +53,10 @@ public class NouveauClientControllerTestCase {
 		doNothing()
 			.when(clientValidator)
 			.validate(any(Client.class), any(Errors.class));
-		doNothing()
-			.when(clientDao)
-			.insert(any(Client.class));
+		when(clientDao.insert(any(Client.class))).thenReturn(null);
 		this.mockMvc
 			.perform(post("/client/nouveau")
-				.param("nom", "Prénom Nom")
+				.param("nom", "Prï¿½nom Nom")
 				.param("email", "prenom.nom@gmail.com")
 				.param("dateNaissance", "21/04/1984"))
 			.andExpect(status().isFound())
@@ -72,12 +71,10 @@ public class NouveauClientControllerTestCase {
 		doNothing()
 			.when(clientValidator)
 			.validate(any(Client.class), any(Errors.class));
-		doNothing()
-			.when(clientDao)
-			.insert(any(Client.class));
+		when(clientDao.insert(any(Client.class))).thenReturn(null);
 		this.mockMvc
 			.perform(post("/client/nouveau")
-				.param("nom", "Prénom Nom")
+				.param("nom", "Prï¿½nom Nom")
 				.param("email", "")
 				.param("dateNaissance", "21/04/1984"))
 			.andExpect(status().isOk())
