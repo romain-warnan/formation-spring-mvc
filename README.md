@@ -210,3 +210,10 @@ Créer une nouvelle méthode qui se déclenche quand on accède à l’URL « / 
 À l’aide de l’instruction `"redirect:/accueil"` rediriger cette URL vers l’URL « /accueil ».
 Utiliser un code 301 (redirection permanente) pour effectuer la redirection (important pour le référencement).
 Tester et vérifier avec les outils de développement du navigateur que le code est bien 301.
+
+```bash
+git add .
+git commit -m "TP1 <idep>"
+git checkout tp1-correction
+git pull
+```
