@@ -13,14 +13,8 @@
 	<body>
 		<h1>Liste de clients</h1>
 		<c:url var="txt" value="/clients/telechargement" />
-		<c:url var="pdf" value="/clients/telechargement">
-		    <c:param name="type">pdf</c:param>
-		</c:url>
-		<c:url var="xls" value="/clients/telechargement">
-		    <c:param name="type">xls</c:param>
-		</c:url>
 		<p>
-			Télécharger : <a href="${txt}">(txt)</a> <a href="${pdf}">(pdf)</a> <a href="${xls}">(xls)</a>
+			Télécharger : <a href="${txt}">(txt)</a>
 		</p>
 		<br/>
 		<c:url value="/clients/chargement" var="url" />
