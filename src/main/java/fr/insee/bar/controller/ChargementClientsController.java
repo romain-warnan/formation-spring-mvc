@@ -3,6 +3,7 @@ package fr.insee.bar.controller;
 import java.io.File;
 import java.util.concurrent.Callable;
 
+import fr.insee.bar.view.ClientsPdfView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.http.HttpHeaders;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.View;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import fr.insee.bar.exception.BarDroitException;
@@ -45,8 +47,9 @@ public class ChargementClientsController {
 	}
 
 	@GetMapping("/telechargement")
-	public Callable<ResponseEntity<FileSystemResource>> telechargement() {
-		return () -> responseEntity(clientService.fichier());
+	public View telechargement(Model model) {
+		model.addAttribute("clients", clientService.clients());
+		return new ClientsPdfView();
 	}
 
 	private static ResponseEntity<FileSystemResource> responseEntity(File file) {

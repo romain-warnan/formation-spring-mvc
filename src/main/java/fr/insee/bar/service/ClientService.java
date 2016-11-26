@@ -8,6 +8,7 @@ import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executors;
@@ -93,6 +94,11 @@ public class ClientService {
 		}
 		executor.shutdown();
 		return file;
+	}
+
+
+	public List<Client> clients() {
+		return clientDao.findAll();
 	}
 
 	private String string(Client client) {
