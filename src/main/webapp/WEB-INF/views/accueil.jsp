@@ -13,6 +13,6 @@
 	<body>
 		<h1><c:out value="${message}" /></h1>
 		<c:url var="url" value="clients" />
-		<p><a href="<c:url value="clients" />">Liste des clients</a> | <a href="<c:url value="commande" />">Passer une commande</a> | <a href="<c:url value="image" />">Image</a></p>
+		<p><a href="<c:url value="clients" />">Liste des clients</a> | <a href="<c:url value="commande" />">Passer une commande</a>
 	</body>
 </html>
