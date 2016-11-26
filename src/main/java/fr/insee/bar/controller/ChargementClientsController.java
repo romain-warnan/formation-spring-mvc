@@ -1,8 +1,9 @@
 package fr.insee.bar.controller;
 
-import java.io.File;
-import java.util.concurrent.Callable;
-
+import fr.insee.bar.exception.BarDroitException;
+import fr.insee.bar.model.Employe;
+import fr.insee.bar.service.ClientService;
+import fr.insee.bar.service.EmployeService;
 import fr.insee.bar.view.ClientsExcelView;
 import fr.insee.bar.view.ClientsPdfView;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,10 +20,8 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.View;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import fr.insee.bar.exception.BarDroitException;
-import fr.insee.bar.model.Employe;
-import fr.insee.bar.service.ClientService;
-import fr.insee.bar.service.EmployeService;
+import java.io.File;
+import java.util.concurrent.Callable;
 
 @Controller
 @RequestMapping("/clients")
