@@ -3,6 +3,7 @@ package fr.insee.bar.controller;
 import java.io.File;
 import java.util.concurrent.Callable;
 
+import fr.insee.bar.view.ClientsExcelView;
 import fr.insee.bar.view.ClientsPdfView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.FileSystemResource;
@@ -46,10 +47,21 @@ public class ChargementClientsController {
 		return "redirect:/clients";
 	}
 
-	@GetMapping("/telechargement")
-	public View telechargement(Model model) {
+	@GetMapping(value = "/telechargement", params = "!type")
+	public Callable<ResponseEntity<FileSystemResource>> telechargement() {
+		return () -> responseEntity(clientService.fichier());
+	}
+
+	@GetMapping(value = "/telechargement", params = "type=pdf")
+	public View telechargementPdf(Model model) {
 		model.addAttribute("clients", clientService.clients());
 		return new ClientsPdfView();
+	}
+
+	@GetMapping(value = "/telechargement", params = "type=xls")
+	public View telechargementExcel(Model model) {
+		model.addAttribute("clients", clientService.clients());
+		return new ClientsExcelView();
 	}
 
 	private static ResponseEntity<FileSystemResource> responseEntity(File file) {
