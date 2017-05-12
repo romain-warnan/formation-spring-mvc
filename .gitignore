@@ -20,3 +20,6 @@ gh-md-toc
 .*-credentials
 *.iml
 .idea/
+.*-credentials
+.idea/
+*.iml
