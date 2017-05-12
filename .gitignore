@@ -15,4 +15,7 @@ target/
 .settings/
 .classpath
 .project
-gh-md-toc
+gh-md-tocgi
+.*-credentials
+.idea/
+*.iml
