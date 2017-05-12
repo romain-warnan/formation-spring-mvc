@@ -18,3 +18,6 @@ target/
 gh-md-toc
 *.iml
 .idea/
+.*-credentials
+.idea/
+*.iml
