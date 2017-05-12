@@ -17,3 +17,6 @@ target/
 .project
 gh-md-toc
 .git-credentials
+.*-credentials
+.idea/
+*.iml
