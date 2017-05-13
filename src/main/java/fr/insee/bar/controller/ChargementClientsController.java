@@ -18,7 +18,6 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.File;
-import java.util.concurrent.Callable;
 
 @Controller
 @RequestMapping("/clients")
@@ -44,8 +43,8 @@ public class ChargementClientsController {
 	}
 
 	@GetMapping(value = "/telechargement")
-	public Callable<ResponseEntity<FileSystemResource>> telechargement() {
-		return () -> responseEntity(clientService.fichier());
+	public ResponseEntity<FileSystemResource> telechargement() {
+		return responseEntity(clientService.fichier());
 	}
 
 	private static ResponseEntity<FileSystemResource> responseEntity(File file) {
