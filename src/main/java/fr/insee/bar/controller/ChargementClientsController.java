@@ -21,7 +21,6 @@ import org.springframework.web.servlet.View;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.File;
-import java.util.concurrent.Callable;
 
 @Controller
 @RequestMapping("/clients")
@@ -47,8 +46,8 @@ public class ChargementClientsController {
 	}
 
 	@GetMapping(value = "/telechargement", params = "!type")
-	public Callable<ResponseEntity<FileSystemResource>> telechargement() {
-		return () -> responseEntity(clientService.fichier());
+	public ResponseEntity<FileSystemResource> telechargement() {
+		return responseEntity(clientService.fichier());
 	}
 
 	@GetMapping(value = "/telechargement", params = "type=pdf")
