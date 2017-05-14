@@ -6,12 +6,12 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<link rel="stylesheet" type="text/css" href="/static/css/application.css">
+		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/static/css/application.css">
 		<title>Spring MVC &ndash; Modification client</title>
 	</head>
 	<body>
 		<h1>Modification client</h1>
-		<c:url value="/client/modification/${client.id}" var="url" />
+		<c:url value="/client/modification" var="url" />
 		<form:form action="${url}" modelAttribute="client" method="post" >
 			<form:hidden path="id"/>
 			

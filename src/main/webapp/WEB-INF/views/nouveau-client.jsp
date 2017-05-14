@@ -6,31 +6,29 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<link rel="stylesheet" type="text/css" href="/static/css/application.css">
+		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/static/css/application.css">
 		<title>Spring MVC &ndash; Nouveau client</title>
 	</head>
 	<body>
 		<h1>Nouveau client</h1>
 		<c:url value="/client/nouveau" var="url" />
-		<form action="${url}" method="post" >
+		<form:form action="${url}" method="post" modelAttribute="client" >
 		
 			<label>Titre&nbsp;</label>
-			<select name="titre" >
-				<c:forEach items="${titres}" var="titre">
-					<option value="${titre}"><c:out value="${titre.libelle}" /></option>
-				</c:forEach>
-			</select><br/>
+			<form:select path="titre">
+				<form:options itemLabel="libelle" />
+			</form:select>
 			
 			<label>Nom&nbsp;:</label>
-			<input type="text" name="nom" /><br/>
+			<form:input type="text" path="nom" /><br/>
 			
 			<label>Email&nbsp;:</label>
-			<input type="text" name="email" />
+			<form:input type="text" path="email" />
 			<br/>
 			<label>Date de naissance&nbsp;:</label>
-			<input type="text" name="dateNaissance" /> <em>jj/mm/aaaa</em><br/>
+			<form:input type="text" path="dateNaissance" /> <em>jj/mm/aaaa</em><br/>
 			
 			<button type="submit">Créer</button>
-		</form>
+		</form:form>
 	</body>
 </html>
