@@ -54,6 +54,7 @@
 	<mvc:annotation-driven conversion-service="conversionService" validator="validator">
 		<mvc:argument-resolvers>
 			<bean class="fr.insee.bar.resolver.EmployeResolver" />
+			<bean class="fr.insee.bar.resolver.ClientsResolver" />
 		</mvc:argument-resolvers>
 	</mvc:annotation-driven>
 	
