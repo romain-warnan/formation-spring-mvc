@@ -16,3 +16,6 @@ target/
 .classpath
 .project
 gh-md-toc
+
+*.iml
+.idea/
