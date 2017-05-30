@@ -30,6 +30,7 @@ public class ModificationClientController {
 	public String modificationClientPost(@ModelAttribute Client client, RedirectAttributes redirectAttributes) {
 		clientDao.update(client);
 		redirectAttributes.addFlashAttribute("modification", true);
-		return "redirect:/client/" + client.getId();
+		redirectAttributes.addAttribute("id", client.getId());
+		return "redirect:/client/{id}";
 	}
 }
