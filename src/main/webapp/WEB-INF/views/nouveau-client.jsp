@@ -29,6 +29,6 @@
 			<form:input type="text" path="dateNaissance" /> <em>jj/mm/aaaa</em><br/>
 			
 			<button type="submit">Créer</button>
-		</form>
+		</form:form>
 	</body>
 </html>
