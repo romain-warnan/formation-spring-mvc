@@ -3,28 +3,22 @@
 
 <tiles-definitions>
 
-    <!-- Définition abstraite  -->
+    <!--
+        Définir ici une <definition> de base appelée "base-definition"…
+    -->
 
-    <definition name="base-definition" template="/WEB-INF/views/layouts/default-layout.jsp">
-        <put-attribute name="title" value="" />
-        <put-attribute name="header" value="/WEB-INF/views/template/default-header.jsp" />
-        <put-attribute name="body" value="" />
-        <put-attribute name="footer" value="/WEB-INF/views/template/default-footer.jsp" />
-    </definition>
 
-    <!-- Définition concrète -->
+    <!--
+        Définir ici une <definition> appelée "accueil"…
+    -->
 
-    <definition name="accueil" extends="base-definition">
-        <put-attribute name="title" value="Accueil" />
-        <put-attribute name="body" value="/WEB-INF/views/pages/accueil.jsp" />
-        <put-attribute name="footer" value="" />
-    </definition>
 
-    <definition name="chargement-clients" extends="base-definition">
-        <put-attribute name="title" value="Clients" />
-        <put-attribute name="body" value="/WEB-INF/views/pages/chargement-clients.jsp" />
-    </definition>
+    <!--
+        Définir ici une <definition> appelée "chargement-clients"…
+    -->
 
+
+    <!--
     <definition name="client" extends="base-definition">
         <put-attribute name="title" value="Client" />
         <put-attribute name="body" value="/WEB-INF/views/pages/client.jsp" />
@@ -59,4 +53,5 @@
         <put-attribute name="title" value="Ajouter un client" />
         <put-attribute name="body" value="/WEB-INF/views/pages/nouveau-client.jsp" />
     </definition>
+    -->
 </tiles-definitions>

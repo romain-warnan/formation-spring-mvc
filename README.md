@@ -1015,7 +1015,109 @@ git checkout tp8-correction
 git pull
 ```
 
-## 9. Configuration
+## 9. Tiles
+
+```bash
+git checkout tp12-enonce
+git pull
+```
+
+### 9.1 Installation de Tiles
+
+#### 9.1.1 Ajouter les dépendances Maven
+
+> pom.xml
+
+```xml
+<dependency>
+    <groupId>org.apache.tiles</groupId>
+    <artifactId>tiles-extras</artifactId>
+    <version>3.0.7</version>
+</dependency>
+```
+
+#### 9.1.2 Remplacer le view resolver
+
+> dispatcher-servlet.xml
+
+```xml
+<bean id="viewResolver" class="org.springframework.web.servlet.view.tiles3.TilesViewResolver"/>
+<bean id="tilesConfigurer" class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
+    <property name="definitions">
+        <list>
+            <value>/WEB-INF/views/tiles.xml</value>
+        </list>
+    </property>
+</bean>
+```
+
+### 9.2 Nouvelle arborescence
+
+Dans `/WEB-INF/views/` :
+
+ 1. créer un répertoire `pages/` et y déplacer les JSP,
+ 2. créer un répertoire `layouts/` contenant un fichier `default-layout.jsp`,
+ 3. créer un répertoire `template/` contenant deux fichiers, `default-footer.jsp` et `default-header.jsp`.
+
+### 9.3 Template principal
+
+> default-layout.jsp
+
+Copier le contenu de `commande.jsp` dans `default-layout.jsp`.
+
+Ajouter la taglib tiles :
+```jsp
+<%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
+```
+
+Puis, remplacer le contenu du `<body>`, par trois sections : `<header>`, `<section>` et `<footer>`.
+Y ajouter les attributs tiles suivants : "header", "body" et "footer". 
+
+À la place du contenu de la balise `<title>`, ajouter l’attribut textuel "title".
+
+### 9.4 Simplification des JSP
+
+> commande.jsp
+
+Le code contenu dans `default-layout.jsp` étant désormais valable pour toutes les pages, il faut le supprimer des JSP du répertoire pages/.
+Ce travail a été fait sauf pour la page `commande.jsp`.
+
+### 9.5 Création du header
+
+> default-header.jsp
+
+Dans le header, ajouter l’image `webapp/static/cocktails.png` et un titre `<h1>` qui sera le nom du bar.
+
+### 9.6 Création du footer
+
+> default-footer.jsp
+
+Dans le footer, ajouter un lien vers la page d’accueil.
+
+### 9.7 Création des pages avec tiles
+
+> tiles.xml
+
+#### 9.7.1 Définition de base
+
+Définir d’abord une `<definition>` de base appelée "base-definition" et pointant vers la page `default-layout.jsp`.
+Ce layout contient quatre attributs appelés title, header, body et footer.
+Les attributs header et footer sont non vides et pointent respectivement vers `default-header.jsp` et `default-footer.jsp`.
+
+#### 9.7.2 Définition de la page d’accueil
+
+Définir ensuite une `<definition>` appelée "accueil" et héritant de "base-definition".
+Valoriser les attributs title, body et footer.
+
+#### 9.7.3 Définition de la page de chargement des clients
+
+Définir ici une `<definition>` appelée "chargement-clients" et héritant de "base-definition".
+Valoriser les attributs title et body.
+
+Finalement décommenter le reste du fichier pour faire fonctionner les autres pages.
+
+
+## 10. Configuration
 
 ```bash
 git checkout tp9-enonce
@@ -1031,7 +1133,7 @@ git checkout tp9-correction
 git pull
 ```
 
-## 10. Transmettre et récupérer un fichier 
+## 11. Transmettre et récupérer un fichier 
 
 ```bash
 git checkout tp10-enonce
@@ -1063,7 +1165,7 @@ git checkout tp10-correction
 git pull
 ```
 
-## 11. Autres types de vues
+## 12. Autres types de vues
 
 ```bash
 git checkout tp12-enonce
