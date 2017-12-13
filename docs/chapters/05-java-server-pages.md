@@ -22,7 +22,7 @@ EL : Expression language
 
 `${liste[0]}`
 ```java
-list.get(0)
+liste.get(0)
 ```
 
 `${map["nom"]}`
