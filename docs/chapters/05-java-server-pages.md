@@ -166,15 +166,15 @@ Hello / ???a.b.bonjour???
 ```html
 <fmt:formatDate value="${date}" pattern="dd/mmmm/YYYY"/>
 
-31 avril 2015
-31 April 2015
+30 avril 2015
+30 April 2015
 ```
 
 ```html
 <fmt:formatDate value="${date}" dateStyle="short"/>
 
-31/04/15
-4/31/15
+30/04/15
+4/30/15
 ```
 
 
