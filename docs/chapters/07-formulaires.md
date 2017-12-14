@@ -213,12 +213,12 @@ Cases à cocher
 
 
 <!-- .slide: class="slide" -->
-Menu déroulant simple
+Menu déroulant multiple
 ```html
-<form:select path="genre.code" items="${genres}" itemLabel="libelle" itemValue="code" />
+<form:select path="jours" items="${semaine}" itemLabel="libelle" itemValue="code" />
 ```
 ```html
-<select id="jour.code" name="jours" multiple="multiple">
+<select id="jours.code" name="jours" multiple="multiple">
     <option value="1">Lundi</option>
     <option value="2" selected="selected">Mardi</option>
     <option value="3">Mercredi</option>
@@ -229,7 +229,7 @@ Menu déroulant simple
 </select
 <input type="hidden" name="_jours" value="1" />
 ```
-<select id="jour.code" name="jours" multiple="multiple">
+<select id="jours.code" name="jours" multiple="multiple">
     <option value="1">Lundi</option>
     <option value="2" selected="selected">Mardi</option>
     <option value="3">Mercredi</option>
