@@ -477,9 +477,9 @@ Déclarer ce nouveau résolveur d’argument auprès de la servlet de Spring MVC
 
 ### 3.6. Tester
 
-1. Démarrer le serveur tel quel et vérifier qu’on peut se rendre sur la page.
-2. Dans le fichier web.xml, activer le profile de serveur à la place du profile de responsable.
-3. Démarrer le serveur et vérifier qu’on ne peut pas se rendre sur la page.
+1. Démarrer le Tomcat tel quel et vérifier qu’on peut se rendre sur la page.
+2. Dans le fichier web.xml, activer le profile de `serveur` à la place du profile de `responsable`.
+3. Démarrer le Tomcat et vérifier qu’on ne peut pas se rendre sur la page.
 
 > web.xml
 
