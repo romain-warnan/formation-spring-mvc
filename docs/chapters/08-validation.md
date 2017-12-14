@@ -16,14 +16,14 @@ Validation côté client : facultative
  - Javascript
 
 Validation côté serveur : __obligatoire et systématique__
+ 
+Contrôles unitaires sur le format des données (type, taille…)
+ - on les retrouve quelle que soit l’application
+ - Spring offre une solution clé en main
 
- – contrôles unitaires sur le format des données (type, taille…)
-  - on les retrouve quelle que soit l’application
-  - Spring offre une solution clé en main
-
- – contrôles métiers
-  - parfois compliqués, ils dépendent largement de l’application
-  - Spring permet d’intégrer ces contrôles dans son schéma de fonctionnement
+Contrôles métiers
+ - parfois compliqués, ils dépendent largement de l’application
+ - Spring permet d’intégrer ces contrôles dans son schéma de fonctionnement
 
 
 
