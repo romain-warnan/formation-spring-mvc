@@ -728,8 +728,6 @@ Injecter le validator dans le contrôleur grâce à l’annotation `@Autowired`.
 
 > nouveau-client.jsp, NouveauClientController.java
 
-:question: Pour exploiter au mieux les mécanismes de Spring MVC, il faut remplacer les balises HTML natives par des balises `<form:…>`. Or on constate que si le `modelAttribute` du formulaire est nul, les attributs `path` génèrent une erreur. Il faut donc préparer le formulaire avec un nouveau client vide dans le contrôleur.
-
 ```bash
 git add .
 git commit -m "TP5 <idep>"
