@@ -178,6 +178,7 @@ public String modificationPersonnePost(@Valid Personne personne, BindingResult r
     if (result.hasErrors()) {
         return "modification-personne";
     }
+	…
     return "redirect:/liste-personnes";
 }
 ```
@@ -240,11 +241,12 @@ public class PersonneValidator implements Validator {
 ```
 ```java
 @PostMapping("/modification")
-public String modificationPersonnePost(@Valid Personne personne, BindingResult result, Model model) {
+public String modificationPersonnePost(@Valid Personne personne, BindingResult result) {
     personneValidator.validate(personne, result);
     if (result.hasErrors()) {
         return "modification-personne";
     }
+	…
 ```
 
 
