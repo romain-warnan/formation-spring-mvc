@@ -51,7 +51,7 @@ public class NouveauClientControllerTest {
 	public void nouveauClientPostSuccess() throws Exception {
 		this.mockMvc
 			.perform(post("/client/nouveau")
-				.param("nom", "Prénom Nom")
+				.param("nom", "Prï¿½nom Nom")
 				.param("email", "prenom.nom@gmail.com")
 				.param("dateNaissance", "21/04/1984"))
 			.andExpect(status().isFound())
@@ -65,7 +65,7 @@ public class NouveauClientControllerTest {
 	public void nouveauClientPostError() throws Exception {
 		this.mockMvc
 			.perform(post("/client/nouveau")
-				.param("nom", "Prénom Nom")
+				.param("nom", "Prï¿½nom Nom")
 				.param("email", "")
 				.param("dateNaissance", "21/04/1984"))
 			.andExpect(status().isOk())
