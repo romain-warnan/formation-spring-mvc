@@ -144,8 +144,6 @@ En général
 - `InternalResourceViewResolver`
 - À paramétrer pour faire la relation entre une chaîne de caractère et une JSP
 
-Attention : l’ordre de déclaration dans web.xml est important
-
 ```xml
 <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
     <property name="prefix">
