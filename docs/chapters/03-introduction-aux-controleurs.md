@@ -64,7 +64,7 @@ Plusieurs URL vers la même méthode :
 Préciser la méthode HTTP :
 ```java
 	@RequestMapping(value = "/accueil", method = RequestMethod.GET)
-	@GetRequest – @PostRequest – @PutRequest …
+	@GetMapping – @PostMapping – @PutMapping …
 ```
 
 Présence ou absence de paramètres
