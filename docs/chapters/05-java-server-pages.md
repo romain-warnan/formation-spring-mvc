@@ -164,7 +164,7 @@ Hello / ???a.b.bonjour???
 ```
 
 ```html
-<fmt:formatDate value="${date}" pattern="dd/mmmm/YYYY"/>
+<fmt:formatDate value="${date}" pattern="dd/MMMM/YYYY"/>
 
 30 avril 2015
 30 April 2015
