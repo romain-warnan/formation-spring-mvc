@@ -215,7 +215,7 @@ Cases à cocher
 <!-- .slide: class="slide" -->
 Menu déroulant multiple
 ```html
-<form:select path="jours" items="${semaine}" itemLabel="libelle" itemValue="code" />
+<form:select path="jours" items="${semaine}" itemLabel="libelle" itemValue="code" multiple="multiple" />
 ```
 ```html
 <select id="jours.code" name="jours" multiple="multiple">
