@@ -817,8 +817,6 @@ La fonction doit faire un appel Ajax vers le contrôleur de recherche d’un coc
 Elle reçoit en retour le prix de la commande.
 Dans la fonction `done`, appeler  la fonction `afficherPrix` avec en paramètre le prix.
 
-> :question: Toute la difficulté réside dans la création de la liste des cocktails sélectionnés. Il faut parcourir les éléments `li.hidden` du bloc `#commande` et ajouter leur contenu un à un à un tableau vide. Chaque élément est ajouté sous la forme `{id: valeur}`. Cette forme représente en JSON un objet de type cocktail qui ne conteint qu’un identifiant.
-
 Tester que tout fonctionne.
 
 ```bash
