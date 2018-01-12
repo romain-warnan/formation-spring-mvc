@@ -199,9 +199,9 @@ public ResponseEntity<HttpStatus> post(@RequestBody Personne personne) {
 ### Ajax avec Spring MVC : cas général
 
 ```java
-@PostMapping(value = "/path/resource", produces = "application/json; charset=UTF-8")
+@GetMapping(value = "/path/resource", produces = "application/json; charset=UTF-8")
 @ResponseBody
-public Commande post(@RequestBody Personne personne) {
+public Commande commande(@RequestBody Personne personne) {
     Commande commande = commandeService.trouver(personne);
     return commande;
 }
