@@ -231,14 +231,15 @@ public class PersonneValidator implements Validator {
     @Override
     public void validate(Object target, Errors errors) {
         Personne personne = (Personne) target;
-        if (personneService.valider(personne)) {
+        if (!personneService.estValide(personne)) {
             errors.reject("erreur.globale.personne");
         }
-        if (personneService.validerDroits(personne)) {
-            errors.rejectValue("adresse", "erreur.personne.droits");
+        if (!personneService.adresseValide(personne)) {
+            errors.rejectValue("adresse", "erreur.personne.adresse");
         }
     }
 ```
+
 ```java
 @PostMapping("/modification")
 public String modificationPersonnePost(@Valid Personne personne, BindingResult result) {
