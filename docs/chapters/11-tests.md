@@ -103,7 +103,7 @@ mockMvc.perform(get("/accueil"))
 ```java
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration({ "classpath:applicationContext.xml", "classpath:dispatcher-servlet.xml" })
-@ActiveProfiles("prodile")
+@ActiveProfiles("profile")
 @WebAppConfiguration
 public class WelcomeControllerTest {
 
@@ -122,8 +122,8 @@ public class WelcomeControllerTest {
 	@Test
 	public void welcome() throws Exception {
 		mockMvc
-			.perform(get("/welcom"))
-			.andExpect(status().isOk()
+			.perform(get("/welcome"))
+			.andExpect(status().isOk())
 			.andExpect(model().attributeDoesNotExist("name"));
 	}
 ```
