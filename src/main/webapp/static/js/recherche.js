@@ -23,10 +23,20 @@ $(document).ready(function() {
 	};
 	
 	var commander = function() {
-		// Récupérer la liste des cocktails sélectionnés
+		// Récupérer la liste des cocktails sélectionnés avec la fonction "cocktailsChoisis"
 		// La poster vers le serveur
 		// Récupérer en retour le prix total de la commande
 		// Appeler la méthode "afficherPrix" avec cette valeur
+	};
+	
+	var cocktailsChoisis = function() {
+		var cocktails = [];
+		$('#commande li.hidden').each(function(index, item) {
+			cocktails.push({
+				id: $(item).text()
+			});
+		});
+		return cocktails;
 	};
 	
 	var afficherSuggestions = function(cocktails) {
