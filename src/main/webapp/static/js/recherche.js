@@ -28,10 +28,7 @@ $(document).ready(function() {
 	};
 	
 	var commander = function() {
-		var cocktails = [];
-		$('#commande li.hidden').each(function(index, item) {
-			cocktails.push({id: $(item).text()});
-		});
+		var cocktails = cocktailsChoisis();
 		$.ajax({
 			url: '/cocktails/commande',
 			method: 'POST',
@@ -40,6 +37,16 @@ $(document).ready(function() {
 		}).done(function(prix) {
 			afficherPrix(prix);
 		});
+	};
+	
+	var cocktailsChoisis = function() {
+		var cocktails = [];
+		$('#commande li.hidden').each(function(index, item) {
+			cocktails.push({
+				id: $(item).text()
+			});
+		});
+		return cocktails;
 	};
 	
 	var afficherSuggestions = function(cocktails) {
