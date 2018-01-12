@@ -22,7 +22,7 @@ Envoyer et recevoir des objets JavaScript
 Pas de rechargement de la page
  - notion d’application single page
 
-Facile à utiliser avec jQuery (ou avec fecth, ou encore superagent)
+Facile à utiliser avec jQuery (ou avec *fetch*, ou encore *superagent*)
  - `$.ajax(), $.get(), $.post(), $(…).load()`
 
 
