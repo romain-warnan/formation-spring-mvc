@@ -11,6 +11,7 @@
 ">
 	<!-- Context -->
 	<context:component-scan base-package="fr.insee.bar" />
+	<context:property-placeholder location="classpath:*.properties" file-encoding="UTF-8" />
 
 	<!-- Beans -->
 	<bean id="viewResolver" class="org.springframework.web.servlet.view.tiles3.TilesViewResolver"/>
