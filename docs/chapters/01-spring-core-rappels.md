@@ -106,15 +106,18 @@ private AdresseDao adresseDao;
 
 <!-- .slide: class="slide" -->
 ### Injection d’une source de propriétés
-Pour externaliser des propriétés non surchargeables par le C.E.I.
-<small>Sinon, utiliser `InseeConfig`</small>
-```
+```properties
 prefix.key.a=Valeur A
 prefix.key.b=Valeur B
 ```
+
+```xml
+<context:property-placeholder location="file://${catalina.base}/webapps/*.properties" file-encoding="UTF-8" ignore-resource-not-found="true" ignore-unresolvable="true" order="0" />
+<context:property-placeholder location="classpath:*.properties" file-encoding="UTF-8" ignore-resource-not-found="true" ignore-unresolvable="true" order="1"/>
+```
+
 ```java
 @Component
-@PropertySource("classpath:application.properties")
 public class ComponentImpl {
 
 @Value("${prefix.key.a}")

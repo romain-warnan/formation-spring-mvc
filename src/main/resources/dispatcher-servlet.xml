@@ -11,7 +11,8 @@
 ">
 	<!-- Context -->
 	<context:component-scan base-package="fr.insee.bar" />
-	<context:property-placeholder location="classpath:*.properties" file-encoding="UTF-8" />
+	<context:property-placeholder location="file://${catalina.base}/webapps/*.properties" file-encoding="UTF-8" ignore-resource-not-found="true" ignore-unresolvable="true" order="0" />
+	<context:property-placeholder location="classpath:*.properties" file-encoding="UTF-8" ignore-resource-not-found="true" ignore-unresolvable="true" order="1"/>
 
 	<!-- Beans -->
 	<bean id="viewResolver" class="org.springframework.web.servlet.view.tiles3.TilesViewResolver"/>
