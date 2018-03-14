@@ -37,7 +37,7 @@ public class CocktailsController {
 	public Double commande(@RequestBody List<Cocktail> cocktails) throws BarCommandeException {
 		cocktailService.verifierCommandeValide(cocktails);
 		double prix = cocktails.stream()
-			.map(cocktailDao::fill)
+			.map(cocktailDao::findByExample)
 			.mapToDouble(Cocktail::getPrix)
 			.sum();
 		return prix;
