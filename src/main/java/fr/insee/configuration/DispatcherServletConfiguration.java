@@ -1,5 +1,6 @@
 package fr.insee.configuration;
 
+import java.io.IOException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,7 +8,9 @@ import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.context.support.ResourceBundleMessageSource;
+import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.format.FormatterRegistry;
 import org.springframework.validation.Validator;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
@@ -44,8 +47,8 @@ public class DispatcherServletConfiguration extends WebMvcConfigurerAdapter impl
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
 		registry
-			.addResourceHandler("/static/**")
-			.addResourceLocations("/static/");
+		.addResourceHandler("/static/**")
+		.addResourceLocations("/static/");
 	}
 
 	@Override
@@ -61,13 +64,13 @@ public class DispatcherServletConfiguration extends WebMvcConfigurerAdapter impl
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
 		registry
-			.addInterceptor(employeInterceptor)
-			.addPathPatterns("/**")
-			.excludePathPatterns("/static/**");
+		.addInterceptor(employeInterceptor)
+		.addPathPatterns("/**")
+		.excludePathPatterns("/static/**");
 		registry
-			.addInterceptor(timerInterceptor)
-			.addPathPatterns("/**")
-			.excludePathPatterns("/static/**");
+		.addInterceptor(timerInterceptor)
+		.addPathPatterns("/**")
+		.excludePathPatterns("/static/**");
 	}
 
 	@Override
@@ -95,6 +98,13 @@ public class DispatcherServletConfiguration extends WebMvcConfigurerAdapter impl
 	public Validator validator() {
 		LocalValidatorFactoryBean bean = new LocalValidatorFactoryBean();
 		bean.setValidationMessageSource(this.messageSource());
+		return bean;
+	}	
+	
+	@Bean
+	public static PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer() throws IOException {
+		PropertySourcesPlaceholderConfigurer bean = new PropertySourcesPlaceholderConfigurer();
+		bean.setLocations(new PathMatchingResourcePatternResolver().getResources("classpath:*.properties"));
 		return bean;
 	}
 }

@@ -16,7 +16,6 @@ import fr.insee.bar.dao.ClientDao;
 import fr.insee.bar.exception.BarDroitException;
 import fr.insee.bar.model.Client;
 import fr.insee.bar.model.Employe;
-import fr.insee.bar.service.EmployeService;
 import fr.insee.bar.validator.ClientValidator;
 
 @Controller
@@ -28,9 +27,6 @@ public class ModificationClientController {
 
 	@Autowired
 	private ClientValidator clientValidator;
-
-	@Autowired
-	private EmployeService employeService;
 
 	@GetMapping("/modification/{client}")
 	public String modificationClient(@PathVariable("client") Client client, Employe employe, Model model) throws BarDroitException {
