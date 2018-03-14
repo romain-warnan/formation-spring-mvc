@@ -31,7 +31,7 @@ public class CocktailsController {
 	@ResponseBody
 	public Double commande(@RequestBody List<Cocktail> cocktails) {
 		double prix = cocktails.stream()
-			.map(cocktailDao::fill)
+			.map(cocktailDao::findByExample)
 			.mapToDouble(Cocktail::getPrix)
 			.sum();
 		return prix;

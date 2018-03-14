@@ -53,7 +53,7 @@ public class CocktailDao {
 		}
 	}
 
-	public Cocktail fill(Cocktail cocktail) {
+	public Cocktail findByExample(Cocktail cocktail) {
 		return template.queryForObject(SQL_FIND, ImmutableMap.of("id", cocktail.getId()), rowMapper);
 	}
 
