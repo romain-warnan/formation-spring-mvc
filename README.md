@@ -218,9 +218,12 @@ Tester.
 name=Spring MVC
 ```
 
+> dispatcher-servlet.xml
+
+Ajouter la ligne `<context:property-placeholder location="classpath:*.properties" file-encoding="UTF-8" />` pour charger le fichier de propriétés.
+
 > AccueilController.java
 
-Ajouter l’annotation `@PropertySource("classpath:application.properties")` pour charger le fichier de propriétés.
 Ajouter un attribute de type `String` dans le contrôleur et l’annoter avec `@Value("${name}")` pour récupérer la valeur de la clé « name »
 Paramétrer le message avec cet attribut.
 Tester.
