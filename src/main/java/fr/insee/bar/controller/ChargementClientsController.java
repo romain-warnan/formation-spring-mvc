@@ -1,11 +1,7 @@
 package fr.insee.bar.controller;
 
-import fr.insee.bar.exception.BarDroitException;
-import fr.insee.bar.model.Employe;
-import fr.insee.bar.service.ClientService;
-import fr.insee.bar.service.EmployeService;
-import fr.insee.bar.view.ClientsExcelView;
-import fr.insee.bar.view.ClientsPdfView;
+import java.io.File;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.http.HttpHeaders;
@@ -20,7 +16,12 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.View;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.io.File;
+import fr.insee.bar.exception.BarDroitException;
+import fr.insee.bar.model.Employe;
+import fr.insee.bar.service.ClientService;
+import fr.insee.bar.service.EmployeService;
+import fr.insee.bar.view.ClientsExcelView;
+import fr.insee.bar.view.ClientsPdfView;
 
 @Controller
 @RequestMapping("/clients")
@@ -65,13 +66,5 @@ public class ChargementClientsController {
 	public View telechargementExcel(Model model) {
 		model.addAttribute("clients", clientService.clients());
 		return new ClientsExcelView();
-	}
-
-	private static ResponseEntity<FileSystemResource> responseEntity(File file) {
-		return ResponseEntity.ok()
-			.contentLength(file.length())
-			.contentType(MediaType.APPLICATION_OCTET_STREAM)
-			.header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + file.getName())
-			.body(new FileSystemResource(file));
 	}
 }
