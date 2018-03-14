@@ -796,7 +796,7 @@ Dans la fonction `done`, appeler  la fonction `afficherSuggestions` avec en para
 
 Ce contrôleur prend en paramètre une liste de cocktail qui sera postée en Ajax grâce à l’annotation `@RequestBody`.
 Dans cette liste, les objets cocktails sont incomplets, il ne possèdent qu’un identifiant.
-Utiliser la méthode CocktailDao.fill pour récupérer leur prix.
+Utiliser la méthode `CocktailDao.findByExample` pour récupérer leur prix.
 En faire la somme et retourner le résultat tel quel.
 
 :question: C’est l’occasion idéale d’utiliser les fonctionnalités de Java 8 : *stream*, *map / reduce* et *method reference*.
