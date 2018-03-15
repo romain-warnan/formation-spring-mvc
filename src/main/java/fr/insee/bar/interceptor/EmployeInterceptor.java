@@ -20,6 +20,9 @@ public class EmployeInterceptor extends HandlerInterceptorAdapter implements Han
 
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+		if(request.getRequestURI().equals("/")) {
+			return true;
+		}
 		HttpSession session = request.getSession(true);
 		Employe employe = (Employe) session.getAttribute("employe");
 		if (employe == null) {
