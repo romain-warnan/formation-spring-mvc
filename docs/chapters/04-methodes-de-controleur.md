@@ -96,7 +96,7 @@ Ajax
 | Type                 | Remarque                        |
 | -------------------- | ------------------------------- |
 | `@RequestBody`       |                                 |
-| `RequestEntity<T>`   | ```HttpMethod method = request.getMethod();<br/>URI url = request.getUrl();<br/>String body = request.getBody();``` |
+| `RequestEntity<T>`   |                                 |
 
 
 
