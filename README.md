@@ -324,7 +324,7 @@ Ce contrôleur possède une méthode qui est appelée à l’URL « /client/{id
 À l’aide de l’annotation `@PathVariable`, récupérer la valeur de l’identifiant passé dans l’URL.
 Dans la base, récupérer le client associé à cet identifiant.
 Ajouter le client au modèle.
-Diriger vers la page `/jsp/client.jsp`.
+Diriger vers la page `WEB-INF/views/client.jsp`.
 
 #### 2.2.2. Créer la page client.jsp
 
