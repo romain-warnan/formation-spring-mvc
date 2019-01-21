@@ -128,7 +128,7 @@ git pull
 
 ### 1.4. Créer le fichier de contexte web
 
-> src/main/resources/servlet-dispatcher.xml 
+> src/main/resources/dispatcher-servlet.xml 
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -151,16 +151,16 @@ git pull
 
 ```xml
 <servlet>
-	<servlet-name>servlet-dispatcher</servlet-name>
+	<servlet-name>dispatcher-servlet</servlet-name>
 	<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
 	<init-param>
 		<param-name>contextConfigLocation</param-name>
-		<param-value>classpath:servlet-dispatcher.xml</param-value>
+		<param-value>classpath:dispatcher-servlet.xml</param-value>
 	</init-param>
 	<load-on-startup>1</load-on-startup>
 </servlet>
 <servlet-mapping>
-	<servlet-name>servlet-dispatcher</servlet-name>
+	<servlet-name>dispatcher-servlet</servlet-name>
 	<url-pattern>/</url-pattern>
 </servlet-mapping>
 ```
@@ -171,7 +171,7 @@ git pull
 
 ### 1.7. Déclarer et paramétrer le viewResolver
 
-> servlet-dispatcher.xml
+> dispatcher-servlet.xml
 
 ```xml
 <bean id="viewResolver"	class="org.springframework.web.servlet.view.InternalResourceViewResolver">
@@ -217,7 +217,6 @@ Tester.
 ```properties
 name=Spring MVC
 ```
-
 > dispatcher-servlet.xml
 
 Ajouter la ligne `<context:property-placeholder location="classpath:*.properties" file-encoding="UTF-8" />` pour charger le fichier de propriétés.
