@@ -563,13 +563,12 @@ Si un client est accessible dans le modèle, afficher un message de succès de l
 
 ### 4.2. Modifier un client existant
 
-#### 4.2.1. Créer le contrôlleur adéquat
+#### 4.2.1. Créer le contrôleur adéquat
 
 > ModificationClientController.java
 
-Comme précédemment, le contrôleur contient trois méthodes :
+Comme précédemment, le contrôleur contient deux méthodes :
 
-* une pour la liste des titres,
 * une associée à l’URL `GET /client/modification`,
 * et une associée à l’URL `POST /client/modification`.
 
