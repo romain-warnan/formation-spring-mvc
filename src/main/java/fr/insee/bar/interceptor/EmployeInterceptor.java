@@ -1,3 +1,4 @@
+
 package fr.insee.bar.interceptor;
 
 import javax.servlet.http.HttpServletRequest;
@@ -10,13 +11,13 @@ import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import fr.insee.bar.model.Employe;
-import fr.insee.bar.provider.EmployeProvider;
+import fr.insee.bar.service.AnnuaireService;
 
 @Component
 public class EmployeInterceptor extends HandlerInterceptorAdapter implements HandlerInterceptor {
 
 	@Autowired
-	private EmployeProvider employeProvider;
+	private AnnuaireService annuaireService;
 
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
@@ -26,7 +27,7 @@ public class EmployeInterceptor extends HandlerInterceptorAdapter implements Han
 		HttpSession session = request.getSession(true);
 		Employe employe = (Employe) session.getAttribute("employe");
 		if (employe == null) {
-			employe = employeProvider.provide();
+			employe = annuaireService.lookup();
 			session.setAttribute("employe", employe);
 		}
 		return true;
