@@ -73,7 +73,7 @@ git pull
 		<artifactId>spring-webmvc</artifactId>
 		<version>${spring.version}</version>
 	</dependency>
-	
+
 	<!-- Servlet -->
 	<dependency>
 		<groupId>javax.servlet</groupId>
@@ -128,7 +128,7 @@ git pull
 
 ### 1.4. Créer le fichier de contexte web
 
-> src/main/resources/dispatcher-servlet.xml 
+> src/main/resources/dispatcher-servlet.xml
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -352,7 +352,7 @@ De cette manière, l’utilisateur peut cliquer sur le nom d’un client pour en
 > ClientConverter.java
 
 Dans  le package `fr.insee.bar.converter`, créer une classe `ClientConverter` qui implémente de l’interface `Converter<String, Client>`.
-Ne pas oublier le stéréotype `@Component` sur la classe. 
+Ne pas oublier le stéréotype `@Component` sur la classe.
 Implémenter la méthode `convert` avec un appel à `clientDao.find(id)`.
 
 #### 2.3.2. Simplifier le contrôleur
@@ -380,7 +380,7 @@ Déclarer ce nouveau convertisseur auprès de la servlet de Spring MVC :
 	</property>
 </bean>
  ```
- 
+
 Tester que l’application fonctionne toujours.
 
 ```bash
@@ -398,7 +398,7 @@ git pull
 ```
 
 ### 3.1. Créer un intercepteur qui mesure la durée de la requête
- 
+
 > TimerInterceptor.java
 
 :clipboard: [Aide](https://romain-warnan.github.io/formation-spring-mvc/#/6/5)
@@ -449,12 +449,12 @@ Sur la page de la liste des clients, ajouter un lien qui dirige vers la nouvelle
 
 ### 3.5. Vérifier que l’employé connecté a le droit de se rendre sur la page d’ajout d’un nouveau client
 
-#### 3.5.1. Vérifier les droits dans le contrôleur 
+#### 3.5.1. Vérifier les droits dans le contrôleur
 
 > NouveauClientController.java
 
-Dans la signature de la méthode, ajouter un objet `Employe`.
-Grace au service `EmployeService`, vérifier que l’employé possède le rôle de responsable.
+Dans la signature de la méthode, ajouter un objet `HttpSession`.
+Grace au service `EmployeService`, vérifier que l’employé contenu dans la session (`(Employe) session.getAttribute("employe")`) possède le rôle de responsable.
 Si oui, le diriger vers la nouvelle page `nouveau-client.jsp`, sinon, le rediriger vers la page `clients.jsp`.
 
 #### 3.5.2. Créer et déclarer un résolveur d’argument pour la classe `Employe`
@@ -476,6 +476,10 @@ Déclarer ce nouveau résolveur d’argument auprès de la servlet de Spring MVC
 	</mvc:argument-resolvers>
 </mvc:annotation-driven>
 ```
+
+> NouveauClientController.java
+
+Finalement, remplacer l’object `HttpSession` par un object `Employe` dans la signature de la méthode. Spring va désormais utiliser le résolveur d’argument.
 
 ### 3.6. Tester
 
@@ -521,7 +525,7 @@ git pull
 Dans un premier temps, il faut une seule méthode associée à l’URL `GET /client/nouveau`.
 Elle ajoute au modèle un client vide.
 Elle dirige vers le formulaire d’ajout d’un nouveau client.
- 
+
 #### 4.1.2. Compléter la page qui permet de créer un nouveau client
 
 > nouveau-client.jsp
@@ -553,7 +557,7 @@ Rediriger vers la liste des clients.
 
 > NouveauClientController.java
 
-Placer le client nouvellement créé dans un *flashAttribute* de manière à pouvoir y accéder après la redirection. 
+Placer le client nouvellement créé dans un *flashAttribute* de manière à pouvoir y accéder après la redirection.
 
 > clients.jsp
 
@@ -597,7 +601,7 @@ Pour que les champs soient pré-remplis avec les données issues de la base, uti
 
 > ModificationClientController.java
 
-Placer un booléen `modification=true` dans un *flashAttribute* de manière à pouvoir y accéder après la redirection. 
+Placer un booléen `modification=true` dans un *flashAttribute* de manière à pouvoir y accéder après la redirection.
 
 > client.jsp
 
@@ -646,20 +650,20 @@ Les règles sont les suivantes :
  * l’email doit correspondre au patron suivant :  `[-_a-z0-9.]+@[-_a-z0-9]+\.[a-z]{2,4}`,
  * le titre doit être non nul,
  * la date doit être non nulle et située dans le passé.
- 
+
 #### 5.1.3. Valider l’objet client dans le contrôleur de modification d’un client
- 
+
 > ModificationClientController.java
- 
+
 Déclencher la validation de l’objet client posté grace à l’annotation `@Valid`.
 Stocker le résultat de cette validation dans un objet de type `BindingResult`.
 Si l’objet n’est pas valide, renvoyer vers le formulaire de modification d’un client.
 Le formulaire devra être rempli avec les dernières données saisies par l’utilisateur.
- 
+
 #### 5.1.4. Afficher les éventuelles erreurs de validation
- 
+
 > modification-client.jsp
- 
+
 Sous chaque champ du formulaire, ajouter la balise `<form:errors>` appropriée.
 On pourra utiliser l’attribut `cssClass="error"` pour avoir mieux voir les messages d’erreurs.
 Faire quelques tests pour vérifier que la validation fonctionne comme souhaité.
@@ -699,7 +703,7 @@ Déclarer le validateur auprès de Spring MVC :
 > message_fr.properties
 
 En suivant les règles de nommage des clés, écrire des messages pour chaque erreur de validation possible.
-Par exemple : 
+Par exemple :
 
 ```properties
 NotNull.client.titre=Choisir un titre
@@ -781,11 +785,11 @@ Tester l’appel à cette fonction en tapant l’URL dans le navigateur : `http:
 Cette fonction est appelée à chaque fois que l’utilisateur appuie sur une touche dans le champ de recherche.
 
 La fonction doit faire un appel Ajax vers le contrôleur de recherche d’un cocktail :
- 
- * vers l’URL `/cocktails/recherche` 
+
+ * vers l’URL `/cocktails/recherche`
  * avec la méthode `GET`,
  * et le paramètre `q` URL encodé.
- 
+
 Elle reçoit en retour une liste de cocktails.
 Dans la fonction `done`, appeler  la fonction `afficherSuggestions` avec en paramètre la liste de cocktails.
 
@@ -810,11 +814,11 @@ En faire la somme et retourner le résultat tel quel.
 Cette fonction est appelée à chaque fois que l’utilisateur appuie sur le bouton « Commander ».
 
 La fonction doit faire un appel Ajax vers le contrôleur de recherche d’un cocktail :
- 
- * vers l’URL `/cocktails/commande` 
+
+ * vers l’URL `/cocktails/commande`
  * avec la méthode `POST`,
  * et en paramètre, la liste des cocktails sélectionnés sous forme d’une chaine de caractère représentant du JSON.
- 
+
 Elle reçoit en retour le prix de la commande.
 Dans la fonction `done`, appeler  la fonction `afficherPrix` avec en paramètre le prix.
 
@@ -1008,7 +1012,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
   * le modèle ne contient aucune erreur,
   * l’url de redirection est `/clients`,
   * il existe un attribut flash qui s’appelle `nouveauClient`.
- 
+
 #### 8.2.5 Tester la méthode nouveauClientPost() pour un formulaire non valide
 
  1. Exécuter un POST avec en paramètre des données de formulaire valides sauf pour l’email
@@ -1084,7 +1088,7 @@ Ajouter la taglib Tiles :
 
 Puis, remplacer le contenu du `<body>`, par trois sections : `<header>`, `<section>` et `<footer>`.
 
-Y ajouter les attributs Tiles suivants : `"header"`, `"body"` et `"footer"`. 
+Y ajouter les attributs Tiles suivants : `"header"`, `"body"` et `"footer"`.
 
 À la place du contenu de la balise `<title>`, ajouter l’attribut textuel "title".
 
@@ -1155,7 +1159,7 @@ git checkout tp9-correction
 git pull
 ```
 
-### 10.2. Transmettre et récupérer un fichier 
+### 10.2. Transmettre et récupérer un fichier
 
 ```bash
 git checkout tp10-enonce
@@ -1179,7 +1183,7 @@ Une fonction effectue les opération suivantes sur le fichier :
  * retourner le nombre total d’insertions.
 
 Sur la même page, permettre à un employé de télécharger la liste complète des clients au format CSV.
- 
+
 ```bash
 git add .
 git commit -m "TP10 <idep>"
