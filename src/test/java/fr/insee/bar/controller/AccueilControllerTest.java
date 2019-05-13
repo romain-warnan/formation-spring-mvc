@@ -52,6 +52,6 @@ public class AccueilControllerTest {
 			.andExpect(status().isOk())
 			.andExpect(model().attributeExists("message"))
 			.andExpect(view().name("accueil"))
-			.andExpect(forwardedUrl("/WEB-INF/views/accueil.jsp"));
+			.andExpect(forwardedUrl("/WEB-INF/views/layouts/default-layout.jsp"));
 	}
 }
