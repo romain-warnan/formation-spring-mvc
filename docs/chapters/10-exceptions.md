@@ -17,7 +17,7 @@
 
 ```java
 @ControllerAdvice
-public class ControllerAdvice {
+public class ExceptionController {
 
     @ExceptionHandler(PersonneException.class)
     public String handlePersonneException(Exception e, Model model) {
