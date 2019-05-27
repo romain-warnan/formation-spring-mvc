@@ -7,24 +7,19 @@ $(document).ready(function() {
 	var $bouton = $('#bouton-commander');
 	var $prix = $('#prix');
 	
-	var initialiser = function(context){
+	var initialiser = context => {
 		$suggestions.hide();
-		$champ.keyup(function(){
-			rechercher($champ.val());
-		});
-		$bouton.click(function() {
-			commander();
-		});
-	};
+		$champ.keyup(() => rechercher($champ.val()));
+		$bouton.click(commander);
+	}
 	
 	var rechercher = function(q){
 		$.ajax({
 			url: '/cocktails/recherche',
 			method: 'GET',
 			data: {'q': encodeURI(q)}
-		}).done(function(cocktails) {
-			afficherSuggestions(cocktails);
-		});
+		})
+		.done(afficherSuggestions);
 	};
 	
 	var commander = function() {
@@ -34,14 +29,13 @@ $(document).ready(function() {
 			method: 'POST',
 			contentType : 'application/json; charset=utf-8',
 			data: JSON.stringify(cocktails)
-		}).done(function(prix) {
-			afficherPrix(prix);
-		});
+		})
+		.done(afficherPrix);
 	};
 	
 	var cocktailsChoisis = function() {
 		var cocktails = [];
-		$('#commande li.hidden').each(function(index, item) {
+		$('#commande li.hidden').each((index, item) => {
 			cocktails.push({
 				id: $(item).text()
 			});
@@ -65,11 +59,11 @@ $(document).ready(function() {
 	
 	var suggerer = function(cocktails){
 		$suggestions.empty();
-		$.each(cocktails, function(index, cocktail) {
+		$.each(cocktails, (index, cocktail) => {
 			$suggestions.append($('<li>').append(cocktail.nom));
 			$suggestions.append($('<li class="hidden">').append(cocktail.id));
 		});
-		$suggestions.find('li').each(function(index, item) {
+		$suggestions.find('li').each((index, item) => {
 			$item = $(item);
 			$item.click(function() {
 				var $libelle = $(this);
