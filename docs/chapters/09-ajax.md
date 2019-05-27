@@ -94,7 +94,7 @@ $.ajax({
     url: '/path/resource',
     method: 'GET',
     data: {
-        'p1': encodeURI('Ma chaîne'),
+        'p1': 'Ma chaîne',
         'p2': 123456
     }
 })

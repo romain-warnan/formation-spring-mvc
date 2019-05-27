@@ -22,7 +22,7 @@ $(document).ready(function() {
 		$.ajax({
 			url: '/cocktails/recherche',
 			method: 'GET',
-			data: {'q': encodeURI(q)}
+			data: {'q': q}
 		}).done(function(cocktails) {
 			afficherSuggestions(cocktails);
 		});
