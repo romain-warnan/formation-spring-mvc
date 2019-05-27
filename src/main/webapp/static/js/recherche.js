@@ -17,7 +17,7 @@ $(document).ready(function() {
 		$.ajax({
 			url: '/cocktails/recherche',
 			method: 'GET',
-			data: {'q': encodeURI(q)}
+			data: {q}
 		})
 		.done(afficherSuggestions);
 	};
