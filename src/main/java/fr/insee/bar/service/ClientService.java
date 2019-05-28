@@ -30,12 +30,10 @@ public class ClientService {
 	private ClientDao clientDao;
 
 	public boolean emailDejaUtilise(Client client) {
-		Optional<Client> optional = clientDao.findByEmail(client.getEmail());
-		if (optional.isPresent()) {
-			Client autre = optional.get();
-			return !Objects.equal(autre.getId(), client.getId());
-		}
-		return false;
+		return clientDao.findByEmail(client.getEmail())
+			.map(Client::getId)
+			.filter(id -> !Objects.equal(id, client.getId()))
+			.isPresent();
 	}
 
 	private boolean emailDejaUtilise(String email) {
@@ -47,16 +45,9 @@ public class ClientService {
 		File file = new File("clients.txt");
 		try {
 			multipartFile.transferTo(file);
-			return FileUtils
-				.readLines(file, "UTF-8")
-				.stream()
-				.map(this::client)
-				.filter(Optional::isPresent)
-				.map(Optional::get)
-				.map(clientDao::insert)
-				.count();
-		}
-		catch (IOException e) {
+			return FileUtils.readLines(file, "UTF-8").stream().map(this::client).filter(Optional::isPresent)
+					.map(Optional::get).map(clientDao::insert).count();
+		} catch (IOException e) {
 			System.err.println(e.getMessage());
 		}
 		return 0;
@@ -65,13 +56,9 @@ public class ClientService {
 	public File fichier() {
 		File file = new File("clients.txt");
 		try {
-			FileUtils.writeLines(file, "UTF-8", clientDao
-				.findAll()
-				.stream()
-				.map(this::string)
-				.collect(Collectors.toList()));
-		}
-		catch (IOException e) {
+			FileUtils.writeLines(file, "UTF-8",
+					clientDao.findAll().stream().map(this::string).collect(Collectors.toList()));
+		} catch (IOException e) {
 			System.out.println(e.getMessage());
 		}
 		return file;
@@ -79,33 +66,22 @@ public class ClientService {
 
 	private String string(Client client) {
 		StringBuilder builder = new StringBuilder();
-		builder
-			.append(client.getTitre().getCode())
-			.append(";")
-			.append(client.getNom())
-			.append(";")
-			.append(client.getEmail())
-			.append(";")
-			.append(this.string(client.getDateNaissance()))
+		builder.append(client.getTitre().getCode()).append(";").append(client.getNom()).append(";")
+				.append(client.getEmail()).append(";").append(this.string(client.getDateNaissance()))
 
 		;
 		return builder.toString();
 	}
 
 	private String string(Date date) {
-		return DateTimeFormatter
-			.ofPattern("dd/MM/yyyy")
-			.format(Instant
-				.ofEpochMilli(date.getTime())
-				.atZone(ZoneId.systemDefault())
-				.toLocalDate());
+		return DateTimeFormatter.ofPattern("dd/MM/yyyy")
+				.format(Instant.ofEpochMilli(date.getTime()).atZone(ZoneId.systemDefault()).toLocalDate());
 	}
 
 	private Optional<Client> client(String ligne) {
 		try {
 			return this.clientException(ligne);
-		}
-		catch (BarClientException e) {
+		} catch (BarClientException e) {
 			System.err.println(e.getMessage());
 		}
 		return Optional.empty();
@@ -127,11 +103,8 @@ public class ClientService {
 	}
 
 	private Date date(String string) throws DateTimeParseException {
-		Instant instant = LocalDate
-			.parse(string, DateTimeFormatter.ofPattern("dd/MM/yyyy"))
-			.atStartOfDay()
-			.atZone(ZoneId.systemDefault())
-			.toInstant();
+		Instant instant = LocalDate.parse(string, DateTimeFormatter.ofPattern("dd/MM/yyyy")).atStartOfDay()
+				.atZone(ZoneId.systemDefault()).toInstant();
 		return Date.from(instant);
 
 	}
@@ -145,14 +118,13 @@ public class ClientService {
 			String[] tokens = ligne.split(";");
 			try {
 				return Optional.of(this.client(tokens));
-			}
-			catch (NumberFormatException e) {
-				throw new BarClientException(String.format("La ligne [%s] est invalide. %s n’est pas un nombre valide.", ligne, tokens[0]));
-			}
-			catch (DateTimeParseException e) {
-				throw new BarClientException(String.format("La ligne [%s] est invalide. La date %s n’est pas au format dd/mm/yyyy", ligne, tokens[3]));
-			}
-			catch (BarClientException e) {
+			} catch (NumberFormatException e) {
+				throw new BarClientException(String
+						.format("La ligne [%s] est invalide. %s n’est pas un nombre valide.", ligne, tokens[0]));
+			} catch (DateTimeParseException e) {
+				throw new BarClientException(String.format(
+						"La ligne [%s] est invalide. La date %s n’est pas au format dd/mm/yyyy", ligne, tokens[3]));
+			} catch (BarClientException e) {
 				throw new BarClientException(String.format("La ligne [%s] est invalide. %s", ligne, e.getMessage()));
 			}
 		}
