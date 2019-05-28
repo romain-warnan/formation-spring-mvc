@@ -1,5 +1,7 @@
 package fr.insee.bar.controller;
 
+import org.springframework.beans.TypeMismatchException;
+import org.springframework.core.convert.ConversionFailedException;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.ui.Model;
@@ -16,6 +18,16 @@ import fr.insee.bar.exception.BarHttpException;
 @ControllerAdvice
 public class ExceptionController {
 
+	@ExceptionHandler(TypeMismatchException.class)
+	@ResponseStatus(HttpStatus.NOT_FOUND)
+	public String handleDroitException(TypeMismatchException e, Model model) {
+		Throwable cause = e.getCause();
+		if(ConversionFailedException.class == cause.getClass()) {
+			model.addAttribute("message", cause.getCause().getMessage());
+		}
+		return "exception";
+	}
+	
 	@ExceptionHandler(BarDroitException.class)
 	@ResponseStatus(HttpStatus.FORBIDDEN)
 	public String handleDroitException(BarDroitException e, Model model) {
