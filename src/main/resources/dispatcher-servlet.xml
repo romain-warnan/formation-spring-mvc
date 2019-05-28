@@ -37,6 +37,11 @@
 		<mvc:interceptor>
 			<mvc:mapping path="/**" />
 			<mvc:exclude-mapping path="/static/**" />
+			<bean class="fr.insee.bar.interceptor.TimerInterceptor" />
+		</mvc:interceptor>
+		<mvc:interceptor>
+			<mvc:mapping path="/**" />
+			<mvc:exclude-mapping path="/static/**" />
 			<bean class="fr.insee.bar.interceptor.EmployeInterceptor" />
 		</mvc:interceptor>
 	</mvc:interceptors>
