@@ -1,7 +1,5 @@
 package fr.insee.bar.service;
 
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,11 +15,9 @@ public class ClientService {
 	private ClientDao clientDao;
 
 	public boolean emailDejaUtilise(Client client) {
-		Optional<Client> optional = clientDao.findByEmail(client.getEmail());
-		if (optional.isPresent()) {
-			Client autre = optional.get();
-			return !Objects.equal(autre.getId(), client.getId());
-		}
-		return false;
+		return clientDao.findByEmail(client.getEmail())
+			.map(Client::getId)
+			.filter(id -> !Objects.equal(id, client.getId()))
+			.isPresent();
 	}
 }
