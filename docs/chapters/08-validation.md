@@ -285,6 +285,7 @@ Instancier une source de message
         </list>
     </property>
     <property name="defaultEncoding" value="UTF-8" />
+    <property name="alwaysUseMessageFormat" value="true" />
 </bean>
 ```
 
